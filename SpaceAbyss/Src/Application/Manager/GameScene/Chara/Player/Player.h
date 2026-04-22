@@ -21,5 +21,7 @@ private:
 
 	void Release() override;
 
+	int test;
+
 
 };
