@@ -22,5 +22,4 @@ private:
 	void Release() override;
 
 
-
 };
