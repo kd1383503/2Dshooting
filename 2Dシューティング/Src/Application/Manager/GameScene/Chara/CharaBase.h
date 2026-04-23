@@ -8,6 +8,7 @@ public:
 	~C_CharaBase() {}
 
 	virtual void Init() = 0;
+	virtual void Action() = 0;
 	virtual void MatUpdate() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
@@ -21,6 +22,7 @@ protected:
 	KdTexture m_tex;// キャラクターのテクスチャ
 	Math::Matrix m_mat;// キャラクターの変換行列
 	Math::Vector2 m_pos; // キャラクターの位置を表すベクトル
+	Math::Vector2 m_move; // キャラクターの移動量を表すベクトル
 	bool m_alive; // キャラクターが生きているかどうかを表すフラグ
 
 };
