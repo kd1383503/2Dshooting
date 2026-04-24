@@ -22,9 +22,13 @@ public:
 	Math::Vector2 GetPos() { return m_pos; } // プレイヤーの位置を返す関数
 	float GetRadius() { return m_radius; } // プレイヤーの半径を返す関数
 	bool GetAlive() { return m_alive; } // プレイヤーが生きているかどうかを返す関数
+	int GetHp() { return m_hp; }//プレイヤーの残り体力を返す関数
 
 	//セッター
 	void SetAlive(bool alive) { m_alive = alive; } // プレイヤーが生きているかどうかを設定する関数
+	void SetHp(int hp) { m_hp = hp; }//hpをセットする関数
+	void SetDamage(int damage) { m_hp -= damage; }//自機に与えられるダメージをHpに反映させる関数
+
 
 private:
 
@@ -34,7 +38,7 @@ private:
 
 	C_GameScene* m_gameScene; // ゲームシーンのポインタ
 	
-	float m_radius = 64; // プレイヤーの半径
+	float m_radius = 32; // プレイヤーの半径
 
 
 };

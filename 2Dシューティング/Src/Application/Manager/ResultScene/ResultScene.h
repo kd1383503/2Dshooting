@@ -16,6 +16,12 @@ public:
 
 private:
 
+	KdTexture m_clearTex;
+	KdTexture m_gameoverTex;
+
+	Math::Matrix m_clearMat;
+	Math::Matrix m_gameoverMat;
+
 
 
 };

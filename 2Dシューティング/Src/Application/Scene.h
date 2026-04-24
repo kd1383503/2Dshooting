@@ -2,30 +2,28 @@
 
 class Scene
 {
-private:
-
-	// テクスチャ ・・・ 画像データ
-	KdTexture charaTex;
-
-	// 行列 ・・・ 座標などの情報
-	Math::Matrix matrix;
-
 public:
 
 	// 初期設定
 	void Init();
-
 	// 解放
 	void Release();
-
 	// 更新処理
 	void Update();
-
 	// 描画処理
 	void Draw2D();
-
 	// GUI処理
 	void ImGuiUpdate();
+
+	//ゲームシーンからresultを持ってくる用
+	void SetResult(bool result) { m_result = result; }
+	//リザルトシーンに結果を持っていく用
+	bool GetResult() { return m_result; }
+
+private:
+
+	bool m_result = true;//true:クリア false:ゲームオーバー
+
 
 private:
 

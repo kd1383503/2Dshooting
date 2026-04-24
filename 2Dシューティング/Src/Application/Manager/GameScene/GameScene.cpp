@@ -1,5 +1,6 @@
 #include"GameScene.h"
 #include"../SceneManager.h"
+#include "../../Scene.h"
 
 #include "Chara/Player/Player.h"// プレイヤーキャラクターのクラスのインクルード
 #include "Chara/Player/PlayerBullet/PlayerBullet.h"// プレイヤーの弾のクラスのインクルード
@@ -38,6 +39,20 @@ void C_GameScene::Update()
 	m_basicEnemy->Update();
 
 	m_hit->PlayerBulletToEnemy();// プレイヤーの弾と敵の当たり判定を行う関数
+	m_hit->PlayerEnemy();//プレイヤーと敵
+
+
+
+
+
+
+
+	//changeScene
+	if (!m_player->GetAlive())
+	{
+		SCENE.SetResult(false);//敗北をセット
+		SCENEMANAGER.ChangeState(new C_ResultScene());
+	}
 
 }
 

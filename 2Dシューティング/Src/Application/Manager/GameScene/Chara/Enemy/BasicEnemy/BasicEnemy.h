@@ -26,6 +26,8 @@ public:
 
 	//セッター
 	void SetAlive(int i, bool alive) { m_alive[i] = alive; }
+	void SetHp(int i, int hp) { m_hp[i] = hp; }
+	void SetDamage(int i, int damage) { m_hp[i] -= damage; }
 
 private:
 
@@ -37,7 +39,7 @@ private:
 	Math::Vector2 m_move[enemyNum]; // 敵の移動量の配列
 	float m_radius = 24; // 敵の半径の配列
 	bool m_alive[enemyNum]; // 敵が生きているかどうかを表すフラグの配列
-
+	int m_hp[enemyNum];//敵の体力
 
 
 

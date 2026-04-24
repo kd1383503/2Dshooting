@@ -42,6 +42,8 @@ void C_BasicEnemy::Update()
 		
 		if (m_pos[i].y < -360 - 32) m_pos[i].y = 360 + 32;
 
+		if (m_hp[i] <= 0)m_alive[i] = false;
+
 	}
 
 
@@ -57,8 +59,9 @@ void C_BasicEnemy::Init()
 	for(int i = 0; i < enemyNum; i++)
 	{
 		m_pos[i] = { (float)(rand() % 1281 - 640),360 + 32};
-		m_move[i] = { 0,-5 };
+		m_move[i] = { 0,-2 };
 		m_alive[i] = true;
+		m_hp[i] = 10;
 	}
 
 }

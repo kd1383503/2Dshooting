@@ -22,6 +22,7 @@ public:
 	Math::Vector2 GetPos(int i) { return m_pos[i]; } // ’e‚ÌˆÊ’u‚ğ•Ô‚·ŠÖ”
 	bool GetAlive(int i) { return m_alive[i]; } // ’e‚ª¶‚«‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ•Ô‚·ŠÖ”
 	float GetRadius() { return m_radius; } // ’e‚Ì”¼Œa‚ğ•Ô‚·ŠÖ”
+	int GetDamage() { return m_buDamage; }//’e‚Ì‰Î—Í‚ğ•Ô‚·ŠÖ”
 
 	//ƒZƒbƒ^[
 	void SetPressSpace(bool press) { m_pressSpace = press; }
@@ -41,7 +42,7 @@ private:
 	bool m_alive[m_buNum]; // ’e‚ª¶‚«‚Ä‚¢‚é‚©‚Ç‚¤‚©
 	int m_wait; // ’e‚ğ”­Ë‚·‚é‚Ü‚Å‚Ì‘Ò‚¿ŠÔ
 	float m_radius = 8; // ’e‚Ì”¼Œa
-
+	const int m_buDamage = 2; //’e‚ÌUŒ‚—Í
 
 	bool m_pressSpace; // ƒXƒy[ƒXƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
 

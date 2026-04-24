@@ -12,7 +12,7 @@ public:
 	void Update();
 
 	void PlayerBulletToEnemy();// プレイヤーの弾と敵の当たり判定を行う関数
-
+	void PlayerEnemy();//プレイヤーと敵の当たり判定を行う関数
 
 private:
 

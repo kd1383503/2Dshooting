@@ -1,6 +1,5 @@
 #include "Hit.h"
 
-//#include "../GameScene.h"
 #include "../../SceneManager.h"
 
 #include "../Chara/Player/Player.h"
@@ -37,11 +36,36 @@ void C_Hit::PlayerBulletToEnemy()
 				
 				// “–‚½‚è”»’è‚ª¬—§‚µ‚½ê‡‚Ìˆ—
 				pb->SetAlive(i, false);
-				be->SetAlive(j, false);
+				be->SetDamage(j, pb->GetDamage());
 				break;
 			}
 		}
 	}
 
+
+}
+
+void C_Hit::PlayerEnemy()
+{
+
+	C_Player* pl = m_gameScene->GetPlayer();
+	C_BasicEnemy* pb = m_gameScene->GetBasicEnemy();
+
+	for (int i = 0; i < pb->GetEnemyNum(); i++)
+	{
+		if (!pb->GetAlive(i))continue;
+
+		float x = pl->GetPos().x - pb->GetPos(i).x;
+		float y = pl->GetPos().y - pb->GetPos(i).y;
+		float distance = sqrt(x * x + y * y);
+
+		if (distance < pl->GetRadius() + pb->GetRadius())
+		{
+			pl->SetAlive(false);
+			pb->SetAlive(i, false);
+			break;
+		}
+
+	}
 
 }

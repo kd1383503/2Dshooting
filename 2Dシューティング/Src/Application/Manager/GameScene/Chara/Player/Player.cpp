@@ -11,18 +11,20 @@ void C_Player::Init()
 	m_tex.Load("Asset/texture/GameScene/Chara/Player/player.png");
 	m_pos = { 0,-300 };
 	m_move = { 0,0 };
+	m_hp = 10;
 	m_alive = true;
 
 }
 
 void C_Player::Action()
 {
+
 	ControlPlayer();
 }
 
 void C_Player::MatUpdate()
 {
-	
+	if (!m_alive) return;
 	m_mat = Math::Matrix::CreateTranslation(m_pos.x, m_pos.y, 0);
 
 }
@@ -30,7 +32,13 @@ void C_Player::MatUpdate()
 void C_Player::Update()
 {
 
+	if (!m_alive)return;
+
 	m_pos += m_move;
+
+
+
+	if (m_hp <= 0) m_alive = false;
 
 }
 
