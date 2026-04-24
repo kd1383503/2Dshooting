@@ -17,9 +17,15 @@ public:
 	void Draw();
 
 
+	//ゲッター
+	int GetBuNum() { return m_buNum; } // 弾の最大数を返す関数
+	Math::Vector2 GetPos(int i) { return m_pos[i]; } // 弾の位置を返す関数
+	bool GetAlive(int i) { return m_alive[i]; } // 弾が生きているかどうかを返す関数
+	float GetRadius() { return m_radius; } // 弾の半径を返す関数
+
 	//セッター
 	void SetPressSpace(bool press) { m_pressSpace = press; }
-
+	void SetAlive(int i, bool alive) { m_alive[i] = alive; } // 弾が生きているかどうかを設定する関数
 
 private:
 
@@ -34,7 +40,7 @@ private:
 	Math::Vector2 m_pos[m_buNum]; // 弾の位置
 	bool m_alive[m_buNum]; // 弾が生きているかどうか
 	int m_wait; // 弾を発射するまでの待ち時間
-	
+	float m_radius = 8; // 弾の半径
 
 
 	bool m_pressSpace; // スペースキーが押されているかどうか

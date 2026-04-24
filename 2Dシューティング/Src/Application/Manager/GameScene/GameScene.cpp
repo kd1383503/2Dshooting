@@ -6,6 +6,8 @@
 
 #include "Chara/Enemy/BasicEnemy/BasicEnemy.h"
 
+#include "Hit/Hit.h"
+
 #include "Back/Back.h" // 背景のクラスのインクルード
 
 
@@ -35,6 +37,8 @@ void C_GameScene::Update()
 
 	m_basicEnemy->Update();
 
+	m_hit->PlayerBulletToEnemy();// プレイヤーの弾と敵の当たり判定を行う関数
+
 }
 
 void C_GameScene::MatUpdate()
@@ -52,15 +56,21 @@ void C_GameScene::MatUpdate()
 void C_GameScene::Init()
 {
 
+	//プレイヤー
 	m_player = new C_Player; // プレイヤーキャラクターのインスタンスを作成
 	m_player->Init();
 
 	m_pBullet = new C_PlayerBullet; // プレイヤーの弾のインスタンスを作成
 	m_pBullet->Init();
 
+	//敵
 	m_basicEnemy = new C_BasicEnemy; // 敵のインスタンスを作成
 	m_basicEnemy->Init();
 
+	//当たり判定
+	m_hit = new C_Hit;
+
+	//背景など
 	m_back = new C_Back; // 背景のインスタンスを作成
 	m_back->Init();
 
@@ -73,6 +83,8 @@ void C_GameScene::Release()
 	if (m_pBullet != nullptr) delete m_pBullet;
 
 	if (m_basicEnemy != nullptr) delete m_basicEnemy;
+
+	if (m_hit != nullptr) delete m_hit;
 
 	if (m_back != nullptr) delete m_back;
 

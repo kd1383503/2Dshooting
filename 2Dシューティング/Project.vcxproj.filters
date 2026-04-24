@@ -201,6 +201,9 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy\BasicEnemy.h">
       <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\Hit\Hit.h">
+      <Filter>Src\Application\Manager\GameScene\Hit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -286,6 +289,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy\BasicEnemy.cpp">
       <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\Hit\Hit.cpp">
+      <Filter>Src\Application\Manager\GameScene\Hit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

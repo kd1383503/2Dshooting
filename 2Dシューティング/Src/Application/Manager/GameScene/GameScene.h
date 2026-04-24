@@ -7,6 +7,8 @@ class C_PlayerBullet; // プレイヤーの弾のクラスの前方宣言
 
 class C_BasicEnemy; // 敵のクラスの前方宣言
 
+class C_Hit; // 当たり判定のクラスの前方宣言
+
 class C_Back;	// 背景のクラスの前方宣言
 
 
@@ -38,6 +40,8 @@ private:
 	
 	C_BasicEnemy* m_basicEnemy = nullptr; // 敵のポインタ
 	
+	C_Hit* m_hit = nullptr; // 当たり判定のポインタ
+
 	C_Back* m_back = nullptr; // 背景のポインタ
 	
 
