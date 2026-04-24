@@ -73,6 +73,9 @@
     <Filter Include="Src\Application\Manager\GameScene\Back">
       <UniqueIdentifier>{5b7bba4f-07e4-4383-921a-4b2f0e12c30c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy">
+      <UniqueIdentifier>{e74be10d-d6ee-473e-b9be-0f68a131faf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -195,6 +198,9 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Back\Back.h">
       <Filter>Src\Application\Manager\GameScene\Back</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy\BasicEnemy.h">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -277,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Manager\GameScene\Back\Back.cpp">
       <Filter>Src\Application\Manager\GameScene\Back</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy\BasicEnemy.cpp">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

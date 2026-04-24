@@ -23,6 +23,7 @@ protected:
 	Math::Matrix m_mat;// キャラクターの変換行列
 	Math::Vector2 m_pos; // キャラクターの位置を表すベクトル
 	Math::Vector2 m_move; // キャラクターの移動量を表すベクトル
+	float m_radius; // キャラクターの半径
 	bool m_alive; // キャラクターが生きているかどうかを表すフラグ
 
 };

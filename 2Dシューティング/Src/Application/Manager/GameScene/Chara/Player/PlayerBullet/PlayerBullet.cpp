@@ -71,7 +71,7 @@ void C_PlayerBullet::BuInit()
 
 	C_Player* m_pl = m_gameScene->GetPlayer();
 	
-	if (m_wait >= 10)
+	if (m_wait >= 5)
 	{
 		for (int i = 0; i < m_buNum; i++)
 		{
