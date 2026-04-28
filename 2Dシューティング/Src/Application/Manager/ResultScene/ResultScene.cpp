@@ -14,7 +14,7 @@ void C_ResultScene::Init()
 	{
 		m_gameoverTex.Load("");
 
-
+		
 
 	}
 }
@@ -23,6 +23,11 @@ void C_ResultScene::MatUpdate()
 {
 	if (SCENE.GetResult())//クリア
 	{
+
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		{
+			SCENEMANAGER.ChangeState(new C_TitleScene());
+		}
 
 	}
 	else//ゲームオーバー

@@ -17,10 +17,16 @@ public:
 private:
 
 	KdTexture m_clearTex;
-	KdTexture m_gameoverTex;
-
 	Math::Matrix m_clearMat;
+	Math::Vector2 m_clearPos;
+
+	bool m_spaceKey;//スペースキーを押せるまで少し時間を作る
+
+
+
+	KdTexture m_gameoverTex;
 	Math::Matrix m_gameoverMat;
+	Math::Vector2 m_gameoverPos;
 
 
 

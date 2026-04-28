@@ -1,15 +1,17 @@
 #include "Hit.h"
 
-#include "../../SceneManager.h"
+#include "../GameScene.h"
 
-#include "../Chara/Player/Player.h"
-#include "../Chara/Player/PlayerBullet/PlayerBullet.h"
-#include "../Chara/Enemy/BasicEnemy/BasicEnemy.h"
+#include "../Chara/Player/Player.h"//Ž©‹@
+#include "../Chara/Player/PlayerBullet/PlayerBullet.h"//Ž©‹@‚Ì’e
+#include "../Chara/Enemy/BasicEnemy/BasicEnemy.h"//ŽG‹›“G
+#include "../Explosion/Explosion.h"//”š”­
 
 
-C_Hit::C_Hit()
+void C_Hit::Update()
 {
-	m_gameScene = static_cast<C_GameScene*>(SCENEMANAGER.GetCurrentState());
+	PlayerBulletToEnemy();
+	PlayerEnemy();
 }
 
 void C_Hit::PlayerBulletToEnemy()
@@ -17,6 +19,7 @@ void C_Hit::PlayerBulletToEnemy()
 
 	C_PlayerBullet* pb = m_gameScene->GetPlayerBullet();
 	C_BasicEnemy* be = m_gameScene->GetBasicEnemy();
+	C_Explosion* ex = m_gameScene->GetExplosion();
 
 	for(int i = 0;i <pb->GetBuNum(); i++)
 	{
@@ -33,6 +36,7 @@ void C_Hit::PlayerBulletToEnemy()
 			if (distance < pb->GetRadius() + be->GetRadius())
 			{
 				//”š”­ˆ—
+				ex->SetEx(pb->GetPos(i), ex->m_exSize::pb);
 				
 				// “–‚½‚è”»’è‚ª¬—§‚µ‚½ê‡‚Ìˆ—
 				pb->SetAlive(i, false);

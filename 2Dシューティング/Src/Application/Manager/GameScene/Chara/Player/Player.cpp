@@ -1,11 +1,9 @@
 #include "Player.h"
-#include "../../../SceneManager.h"
+#include "../../GameScene.h"
 #include "PlayerBullet/PlayerBullet.h"
 
 void C_Player::Init()
 {
-
-	m_gameScene = static_cast<C_GameScene*>(SCENEMANAGER.GetCurrentState());
 
 	// プレイヤーの初期設定
 	m_tex.Load("Asset/texture/GameScene/Chara/Player/player.png");
@@ -59,19 +57,47 @@ void C_Player::ControlPlayer()
 	// キーが押されたときに移動量を設定する
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 	{
-		m_move.y = 5;
+		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+		{
+			m_move.y = 8;
+		}
+		else
+		{
+			m_move.y = 5;
+		}
 	}
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 	{
-		m_move.y = - 5;
+		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+		{
+			m_move.y = -8;
+		}
+		else
+		{
+			m_move.y = -5;
+		}
 	}
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
-		m_move.x = 5;
+		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+		{
+			m_move.x = 8;
+		}
+		else
+		{
+			m_move.x = 5;
+		}
 	}
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
-		m_move.x = -5;
+		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+		{
+			m_move.x = -8;
+		}
+		else
+		{
+			m_move.x = -5;
+		}
 	}
 
 	// キーが離されたときに移動量を0にする

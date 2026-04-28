@@ -1,16 +1,8 @@
 #include "PlayerBullet.h"
-#include "../../../../SceneManager.h"
 #include "../../../GameScene.h"
 #include "../Player.h"
 
 
-C_PlayerBullet::C_PlayerBullet()
-{
-
-	m_gameScene = static_cast<C_GameScene*>(SCENEMANAGER.GetCurrentState());
-	
-
-}
 
 
 void C_PlayerBullet::Draw()

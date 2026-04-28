@@ -30,6 +30,15 @@ public:
 	void SetDamage(int damage) { m_hp -= damage; }//自機に与えられるダメージをHpに反映させる関数
 
 
+
+	//ゲームシーンのアドレスセッター
+	void SetGameScene(C_GameScene* gameScene)
+	{
+		if (!gameScene)return;
+		m_gameScene = gameScene;
+	}
+
+
 private:
 
 

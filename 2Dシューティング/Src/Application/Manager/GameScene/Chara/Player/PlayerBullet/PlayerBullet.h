@@ -6,7 +6,7 @@ class C_PlayerBullet
 {
 public:
 
-	C_PlayerBullet();
+	C_PlayerBullet(){}
 	~C_PlayerBullet() { Release(); }
 
 	void Init();
@@ -27,6 +27,13 @@ public:
 	//セッター
 	void SetPressSpace(bool press) { m_pressSpace = press; }
 	void SetAlive(int i, bool alive) { m_alive[i] = alive; } // 弾が生きているかどうかを設定する関数
+
+	//ゲームシーンのアドレスセッター
+	void SetGameScene(C_GameScene* gameScene)
+	{
+		if (!gameScene)return;
+		m_gameScene = gameScene;
+	}
 
 private:
 

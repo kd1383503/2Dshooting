@@ -164,6 +164,7 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy\BasicEnemy.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Player\Player.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Player\PlayerBullet\PlayerBullet.h" />
+    <ClInclude Include="Src\Application\Manager\GameScene\Explosion\Explosion.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\GameScene.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Hit\Hit.h" />
     <ClInclude Include="Src\Application\Manager\ResultScene\ResultScene.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy\BasicEnemy.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Player\PlayerBullet\PlayerBullet.cpp" />
+    <ClCompile Include="Src\Application\Manager\GameScene\Explosion\Explosion.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\GameScene.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Hit\Hit.cpp" />
     <ClCompile Include="Src\Application\Manager\ResultScene\ResultScene.cpp" />
