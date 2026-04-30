@@ -25,6 +25,6 @@ public:
 
 private:
 
-	C_GameScene* m_gameScene; // ゲームシーンのポインタ
+	C_GameScene* m_gameScene = nullptr; // ゲームシーンのポインタ
 
 };

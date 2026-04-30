@@ -45,7 +45,7 @@ private:
 	void Release() override;
 
 
-	C_GameScene* m_gameScene; // ゲームシーンのポインタ
+	C_GameScene* m_gameScene = nullptr; // ゲームシーンのポインタ
 	
 	float m_radius = 32; // プレイヤーの半径
 

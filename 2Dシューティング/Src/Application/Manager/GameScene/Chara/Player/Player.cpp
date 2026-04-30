@@ -34,7 +34,10 @@ void C_Player::Update()
 
 	m_pos += m_move;
 
-
+	if (m_pos.x > 640 - 32) m_pos.x = 640 - 32;
+	if (m_pos.x < -640 + 32) m_pos.x = -640 + 32;
+	if (m_pos.y > 360 - 32) m_pos.y = 360 - 32;
+	if (m_pos.y < -360 + 32) m_pos.y = -360 + 32;
 
 	if (m_hp <= 0) m_alive = false;
 

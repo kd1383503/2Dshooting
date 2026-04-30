@@ -7,24 +7,25 @@ class C_BasicEnemy : public C_CharaBase
 {
 public:
 
-	C_BasicEnemy(){}
+	C_BasicEnemy() {}
 	~C_BasicEnemy() { Release(); }
 
 	//C_CharaBaseクラスの純粋仮想関数をオーバーライド
 	void Init() override;
-	void EnemyInit(int i);
+	void EnemyInit(int i, int type);
 	void Action() override;
 	void MatUpdate() override;
 	void Update() override;
 	void Draw() override;
 
-	int Rand(int x,int y);//引数floatでｘが範囲ｙは±調整
+	int Rand(int x, int y);//引数floatでｘが範囲ｙは±調整
 
 	//ゲッター
 	int GetEnemyNum() { return enemyNum; }
 	Math::Vector2 GetPos(int i) { return m_pos[i]; }
 	float GetRadius() { return m_radius; }
 	bool GetAlive(int i) { return m_alive[i]; }
+	int GetKill() { return m_killCnt; }//ベーシックエネミーを倒した数を他クラスに渡す
 
 	//セッター
 	void SetAlive(int i, bool alive) { m_alive[i] = alive; }
@@ -34,6 +35,7 @@ public:
 	//gamescene setter
 	void SetGameScene(C_GameScene* gameScene)
 	{
+		if (!gameScene)return;
 		m_gameScene = gameScene;
 	}
 
@@ -41,7 +43,14 @@ private:
 
 	void Release() override;
 
-	C_GameScene* m_gameScene;
+	enum enemyType
+	{
+		basic = 0,
+		shake,
+		uni
+	};
+
+	C_GameScene* m_gameScene = nullptr;
 
 	static const int enemyNum = 10; // 敵の数
 	Math::Matrix m_mat[enemyNum]; // 敵の変換行列の配列
@@ -50,7 +59,12 @@ private:
 	float m_radius = 24; // 敵の半径の配列
 	bool m_alive[enemyNum]; // 敵が生きているかどうかを表すフラグの配列
 	int m_hp[enemyNum];//敵の体力
+	int m_enemyType[enemyNum];//タイプごとに画像と動きを変える
 
 
+	int m_shakeCnt[enemyNum] = {};//
+
+
+	int m_killCnt = 0; //ベーシックエネミーが倒されたら１カウント
 
 };

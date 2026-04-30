@@ -79,6 +79,9 @@
     <Filter Include="Src\Application\Manager\GameScene\Explosion">
       <UniqueIdentifier>{b00661a1-e4dd-4ba7-9ad5-1a89b93a6009}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy">
+      <UniqueIdentifier>{1cd12d83-a3f8-4b2d-9f41-99f17ff5815e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -210,6 +213,9 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Explosion\Explosion.h">
       <Filter>Src\Application\Manager\GameScene\Explosion</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidEnemy.h">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -301,6 +307,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Manager\GameScene\Explosion\Explosion.cpp">
       <Filter>Src\Application\Manager\GameScene\Explosion</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidEnemy.cpp">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

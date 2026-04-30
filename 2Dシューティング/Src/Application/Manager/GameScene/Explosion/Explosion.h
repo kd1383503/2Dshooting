@@ -50,7 +50,7 @@ private:
 
 	void Release();
 
-	C_GameScene* m_gameScene;
+	C_GameScene* m_gameScene = nullptr;
 
 	KdTexture m_tex;
 	static const int m_expNum = 30;//“¯”š”­‰Â”\”

@@ -14,6 +14,11 @@ public:
 	virtual void Draw() = 0;
 	
 
+	enum m_enemyHp
+	{
+		basic = 10,
+		mid = 100
+	};
 
 protected:
 
