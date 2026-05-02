@@ -18,7 +18,7 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	int Rand(int x, int y);//引数floatでｘが範囲ｙは±調整
+	
 
 	//ゲッター
 	int GetEnemyNum() { return enemyNum; }
@@ -31,6 +31,7 @@ public:
 	void SetAlive(int i, bool alive) { m_alive[i] = alive; }
 	void SetHp(int i, int hp) { m_hp[i] = hp; }
 	void SetDamage(int i, int damage) { m_hp[i] -= damage; }
+	void SetKill(int i) { m_killCnt = i; }
 
 	//gamescene setter
 	void SetGameScene(C_GameScene* gameScene)
@@ -66,5 +67,7 @@ private:
 
 
 	int m_killCnt = 0; //ベーシックエネミーが倒されたら１カウント
+
+	
 
 };

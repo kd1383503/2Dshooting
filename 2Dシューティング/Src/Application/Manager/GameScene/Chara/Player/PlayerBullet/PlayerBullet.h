@@ -48,10 +48,11 @@ private:
 	Math::Vector2 m_pos[m_buNum]; // ’e‚ÌˆÊ’u
 	bool m_alive[m_buNum]; // ’e‚ª¶‚«‚Ä‚¢‚é‚©‚Ç‚¤‚©
 	int m_wait; // ’e‚ğ”­Ë‚·‚é‚Ü‚Å‚Ì‘Ò‚¿ŠÔ
-	float m_radius = 8; // ’e‚Ì”¼Œa
+	float m_radius = 9; // ’e‚Ì”¼Œa
 	const int m_buDamage = 2; //’e‚ÌUŒ‚—Í
 
 	bool m_pressSpace; // ƒXƒy[ƒXƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
 
+	Math::Vector2 m_size = {1.8f,1.2f};
 
 };

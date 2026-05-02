@@ -18,13 +18,12 @@ public:
 	
 
 	//ゲッター
-	int GetEnemyNum() { return m_enemyNum; }
-	Math::Vector2 GetPos(int i) { return m_pos[i]; }
+	Math::Vector2 GetPos(int i) { return m_pos; }
 
 	//セッター
-	void SetHp(int i, int hp) { m_hp[i] = hp; }
-	void SetDamage(int i, int damage) { m_hp[i] -= damage; }
-	void SetAlive(int i, bool alive) { m_alive[i] = alive; }
+	void SetHp(int hp) { m_hp = hp; }
+	void SetDamage(int damage) { m_hp -= damage; }
+	void SetAlive(bool alive) { m_alive = alive; }
 
 	//ゲームシーンセッター
 	void SetGameScene(C_GameScene* gameScene)
@@ -40,13 +39,16 @@ private:
 
 	C_GameScene* m_gameScene = nullptr;
 
-	static const int m_enemyNum = 10; // 敵の数
-	Math::Matrix m_mat[m_enemyNum]; // 敵の変換行列の配列
-	Math::Vector2 m_pos[m_enemyNum]; // 敵の位置の配列
-	Math::Vector2 m_move[m_enemyNum]; // 敵の移動量の配列
+	
+	Math::Matrix m_mat; // 敵の変換行列の配列
+	Math::Vector2 m_pos; // 敵の位置の配列
+	Math::Vector2 m_move; // 敵の移動量の配列
 	Math::Vector2 m_radius = {}; // 敵の半径の配列
 	Math::Vector2 m_size;
-	bool m_alive[m_enemyNum]; // 敵が生きているかどうかを表すフラグの配列
-	int m_hp[m_enemyNum];//敵の体力
+	bool m_alive; // 敵が生きているかどうかを表すフラグの配列
+	int m_hp;//敵の体力
+
+	bool m_atk = false;//攻撃許可
+	int m_shake = 0;
 
 };

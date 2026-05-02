@@ -251,13 +251,3 @@ void C_BasicEnemy::Release()
 	m_tex.Release();
 }
 
-
-int C_BasicEnemy::Rand(int x, int y)
-{
-
-	int r;
-
-	r = rand() % (x + 1) - y;
-
-	return r;
-}

@@ -13,6 +13,14 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	
+	int Rand(int x, int y)//引数floatでｘが範囲ｙは±調整
+	{
+		int r;
+
+		r = rand() % (x + 1) - y;
+
+		return r;
+	}
 
 	enum m_enemyHp
 	{
@@ -26,10 +34,12 @@ protected:
 	
 	KdTexture m_tex;// キャラクターのテクスチャ
 	Math::Matrix m_mat;// キャラクターの変換行列
+	Math::Vector2 m_scale;//キャラクターのサイズ
 	Math::Vector2 m_pos; // キャラクターの位置を表すベクトル
 	Math::Vector2 m_move; // キャラクターの移動量を表すベクトル
 	float m_radius; // キャラクターの半径
 	bool m_alive; // キャラクターが生きているかどうかを表すフラグ
 	int m_hp;//キャラクターの体力
+
 
 };

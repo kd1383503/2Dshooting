@@ -29,7 +29,7 @@ void C_Hit::PlayerBulletToEnemy()
 			if (!be->GetAlive(j)) continue;
 			// ’e‚Æ“G‚Ì‹——£‚ğŒvZ‚·‚é
 			float x = pb->GetPos(i).x - be->GetPos(j).x;
-			float y = pb->GetPos(i).y - be->GetPos(j).y;
+			float y = (pb->GetPos(i).y + 14) - be->GetPos(j).y;
 			float distance = sqrtf(x * x + y * y);
 
 			// “–‚½‚è”»’è‚Ì”¼Œa‚ÍA’e‚Ì”¼Œa‚Æ“G‚Ì”¼Œa‚Ì‡Œv‚Æ‚·‚é

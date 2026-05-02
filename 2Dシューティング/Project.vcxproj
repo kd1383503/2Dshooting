@@ -162,6 +162,7 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Back\Back.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\CharaBase.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy\BasicEnemy.h" />
+    <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossEnemy.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidEnemy.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Player\Player.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Player\PlayerBullet\PlayerBullet.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="..\Library\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Back\Back.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BasicEnemy\BasicEnemy.cpp" />
+    <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossEnemy.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidEnemy.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Player\PlayerBullet\PlayerBullet.cpp" />

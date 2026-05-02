@@ -1,95 +1,152 @@
 #include "MidEnemy.h"
 #include "../../../GameScene.h"
-
+#include "../BasicEnemy/BasicEnemy.h"
 
 void C_MidEnemy::Draw()
 {
 
-	for (int i = 0; i < m_enemyNum; i++)
-	{
-		if (!m_alive[i])continue;
+	
+	if (!m_alive)return;
+	SHADER.m_spriteShader.SetMatrix(m_mat);
+	SHADER.m_spriteShader.DrawTex(&m_tex, Math::Rectangle(0, 0, 400, 200), 1.0f);
 
-		SHADER.m_spriteShader.SetMatrix(m_mat[i]);
-		SHADER.m_spriteShader.DrawTex(&m_tex, Math::Rectangle(0, 0, 0, 0), 1.0f);
-
-	}
+	
 
 }
 
 void C_MidEnemy::Action()
 {
 
-	for (int i = 0; i < m_enemyNum; i++)
+	C_BasicEnemy* be = m_gameScene->GetBasicEnemy();
+	
+	if (be->GetKill() >= 5)//もしキルカウントが条件数を満たしたら
 	{
-		if (!m_alive[i])continue;
 
-		
-
-	}
-
-	if (0)//もしキルカウントが条件数を満たしたら
-	{
-		for (int i = 0; i < m_enemyNum; i++)
+		if (!m_alive)
 		{
-			if (!m_alive[i])continue;
 
-			m_alive[i] = true;
-			m_hp[i] = m_enemyHp::mid;
-			m_pos[i] = { 0,0 };
-			m_move[i] = { 0,0 };
-
+			m_alive = true;
+			m_hp = m_enemyHp::mid;
+			m_pos = { (float)Rand(600, 300) ,860 };
+			m_move = { 0,0 };
+			m_atk = false;
 		}
+
 	}
+
+	if (!m_alive)return;
+	if (!m_atk)
+	{
+		m_move.y = -5;
+	}
+	else
+	{
+
+		if (m_shake <= 0)
+		{
+
+			if (m_pos.x < -150)
+			{
+				if (Rand(100, 0) % 3 != 0)
+				{
+					m_move.x = 1;
+				}
+				else
+				{
+					m_move.x = -1;
+				}
+			}
+			else if (m_pos.x > 150)
+			{
+				if (Rand(100, 0) % 2 != 0)
+				{
+					m_move.x = -1;
+				}
+				else
+				{
+					m_move.x = 1;
+				}
+			}
+			else
+			{
+				if (Rand(100, 0) % 2 != 0)
+				{
+					m_move.x = 1;
+				}
+				else
+				{
+					m_move.x = -1;
+				}
+			}
+			
+
+			m_shake = Rand(60, 0) + 90;
+		}
+
+
+		m_shake--;
+	}
+	
+	
 
 }
 
 void C_MidEnemy::Update()
 {
 
-	for (int i = 0; i < m_enemyNum; i++)
+	if (!m_alive)return;
+
+	m_pos += m_move;
+
+
+	if (m_pos.y <= 240)
 	{
-
-		m_pos[i] = m_move[i];
-
-
-
-
-		if (m_hp[i] <= 0)
-		{
-			m_alive[i] = false;
-		}
-
+		m_pos.y = 240;
+		m_move.y = 0.0f;
+		m_atk = true;
 	}
+
+	if (m_pos.x > 440) m_pos.x = 440;
+	if (m_pos.x < -440) m_pos.x = -440;
+
+
+	C_BasicEnemy* be = m_gameScene->GetBasicEnemy();
+
+	if (m_hp <= 0)
+	{
+		m_alive = false;
+		be->SetKill(0);
+	}
+	
 
 }
 
 void C_MidEnemy::MatUpdate()
 {
 
-	for (int i = 0; i < m_enemyNum; i++)
-	{
-		Math::Matrix trans = Math::Matrix::CreateTranslation(m_pos[i].x, m_pos[i].y, 0);
-		Math::Matrix scale = Math::Matrix::CreateScale(m_size.x, m_size.y, 0);
-		m_mat[i] = scale * trans;
+	
+	Math::Matrix trans = Math::Matrix::CreateTranslation(m_pos.x, m_pos.y, 0);
+	Math::Matrix scale = Math::Matrix::CreateScale(m_size.x, m_size.y, 0);
+	m_mat = scale * trans;
 
-	}
+	
 
 }
 
 void C_MidEnemy::Init()
 {
 
-	m_tex.Load("");
+	m_tex.Load("Asset/texture/GameScene/Chara/Enemy/midBoss.png");
 
-	for (int i = 0; i < m_enemyNum; i++)
-	{
-		m_pos[i] = {};
-		m_move[i] = {};
-		m_alive[i] = false;
-		m_hp[i] = 100;
+	
+	m_pos = {};
+	m_move = {};
+	m_alive = false;
+	m_size = { 1,1 };
+	m_hp = 100;
 
-	}
-	m_size = { 2,2 };
+	
+	m_size = { 1,1 };
 
 }
 

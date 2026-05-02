@@ -6,6 +6,7 @@
 #include "Chara/Player/PlayerBullet/PlayerBullet.h"// プレイヤーの弾のクラスのインクルード
 
 #include "Chara/Enemy/BasicEnemy/BasicEnemy.h"//雑魚敵クラスのインクルード
+#include "Chara/Enemy/MidEnemy/MidEnemy.h"//敵クラスのインクルード
 
 #include "Hit/Hit.h"//当たり判定クラスのインクルード
 #include "Explosion/Explosion.h"//爆発処理クラスのインクルード
@@ -21,6 +22,7 @@ void C_GameScene::Draw()
 	m_pBullet->Draw();//プレイヤーの弾
 
 	m_basicEnemy->Draw();//敵
+	m_midEnemy->Draw();//敵
 
 	m_exp->Draw();//爆発
 
@@ -37,12 +39,14 @@ void C_GameScene::Update()
 		m_player->Action();
 
 		m_basicEnemy->Action();
+		m_midEnemy->Action();
 
 
 		m_player->Update();
 		m_pBullet->Update();
 
 		m_basicEnemy->Update();
+		m_midEnemy->Update();
 
 		m_hit->Update();//当たり判定を行う関数
 
@@ -77,6 +81,7 @@ void C_GameScene::MatUpdate()
 	m_pBullet->MatUpdate();
 
 	m_basicEnemy->MatUpdate();
+	m_midEnemy->MatUpdate();
 
 	m_exp->MatUpdate();
 
@@ -106,6 +111,11 @@ void C_GameScene::Init()
 	m_basicEnemy->SetGameScene(this);
 	m_basicEnemy->Init();
 
+	m_midEnemy = new C_MidEnemy;
+	m_midEnemy->SetGameScene(this);
+	m_midEnemy->Init();
+
+
 	//当たり判定
 	m_hit = new C_Hit;
 	m_hit->SetGameScene(this);
@@ -127,6 +137,7 @@ void C_GameScene::Release()
 	if (m_pBullet != nullptr) delete m_pBullet;
 
 	if (m_basicEnemy != nullptr) delete m_basicEnemy;
+	if (m_midEnemy != nullptr) delete m_midEnemy;
 
 	if (m_hit != nullptr) delete m_hit;
 	if (m_exp != nullptr) delete m_exp;

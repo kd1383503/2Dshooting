@@ -11,6 +11,7 @@ void C_Player::Init()
 	m_move = { 0,0 };
 	m_hp = 10;
 	m_alive = true;
+	m_scale = { 1.33f, 1.33f };
 
 }
 
@@ -23,7 +24,9 @@ void C_Player::Action()
 void C_Player::MatUpdate()
 {
 	if (!m_alive) return;
-	m_mat = Math::Matrix::CreateTranslation(m_pos.x, m_pos.y, 0);
+	Math::Matrix scale = Math::Matrix::CreateScale(m_scale.x, m_scale.y, 0);
+	Math::Matrix trans = Math::Matrix::CreateTranslation(m_pos.x, m_pos.y, 0);
+	m_mat = scale * trans;
 
 }
 
@@ -34,10 +37,20 @@ void C_Player::Update()
 
 	m_pos += m_move;
 
+
+	//画面内固定
 	if (m_pos.x > 640 - 32) m_pos.x = 640 - 32;
 	if (m_pos.x < -640 + 32) m_pos.x = -640 + 32;
 	if (m_pos.y > 360 - 32) m_pos.y = 360 - 32;
 	if (m_pos.y < -360 + 32) m_pos.y = -360 + 32;
+
+	//アニメーション
+	m_anim.x += 0.2;
+	if (m_anim.x >= 3.0f)
+	{
+		m_anim.x = 0.0f;
+	}
+
 
 	if (m_hp <= 0) m_alive = false;
 
@@ -49,7 +62,7 @@ void C_Player::Draw()
 	if (m_alive)
 	{
 		SHADER.m_spriteShader.SetMatrix(m_mat);
-		SHADER.m_spriteShader.DrawTex(&m_tex, Math::Rectangle(0, 0, 64, 64), 1.0f);
+		SHADER.m_spriteShader.DrawTex(&m_tex, Math::Rectangle((int)m_anim.x * 48, (int)m_anim.y * 58, 48, 58), 1.0f);
 	}
 
 }
@@ -85,10 +98,12 @@ void C_Player::ControlPlayer()
 		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
 		{
 			m_move.x = 8;
+			m_anim.y = 2.0f;
 		}
 		else
 		{
 			m_move.x = 5;
+			m_anim.y = 1.0f;
 		}
 	}
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
@@ -96,10 +111,12 @@ void C_Player::ControlPlayer()
 		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
 		{
 			m_move.x = -8;
+			m_anim.y = 4.0f;
 		}
 		else
 		{
 			m_move.x = -5;
+			m_anim.y = 3.0f;
 		}
 	}
 
@@ -107,6 +124,7 @@ void C_Player::ControlPlayer()
 	if(!(GetAsyncKeyState(VK_RIGHT) & 0x8000) && !(GetAsyncKeyState(VK_LEFT) & 0x8000))
 	{
 		m_move.x = 0;
+		m_anim.y = 0.0f;
 	}
 	if(!(GetAsyncKeyState(VK_UP) & 0x8000) && !(GetAsyncKeyState(VK_DOWN) & 0x8000))
 	{

@@ -48,6 +48,6 @@ private:
 	C_GameScene* m_gameScene = nullptr; // ゲームシーンのポインタ
 	
 	float m_radius = 32; // プレイヤーの半径
-
+	Math::Vector2 m_anim = {0,0};
 
 };
