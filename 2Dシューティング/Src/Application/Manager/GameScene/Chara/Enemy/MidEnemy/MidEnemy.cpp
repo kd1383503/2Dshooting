@@ -1,6 +1,7 @@
 #include "MidEnemy.h"
 #include "../../../GameScene.h"
 #include "../BasicEnemy/BasicEnemy.h"
+#include "MidBullet/MidBullet.h"
 
 void C_MidEnemy::Draw()
 {
@@ -19,7 +20,7 @@ void C_MidEnemy::Action()
 
 	C_BasicEnemy* be = m_gameScene->GetBasicEnemy();
 	
-	if (be->GetKill() >= 5)//もしキルカウントが条件数を満たしたら
+	if (be->GetKill() >= 1)//もしキルカウントが条件数を満たしたら
 	{
 
 		if (!m_alive)
@@ -29,6 +30,9 @@ void C_MidEnemy::Action()
 			m_hp = m_enemyHp::mid;
 			m_pos = { (float)Rand(600, 300) ,860 };
 			m_move = { 0,0 };
+			m_strWait = 30;
+			m_clothWait = 60;
+			m_chargeWait = 120;
 			m_atk = false;
 		}
 
@@ -84,6 +88,68 @@ void C_MidEnemy::Action()
 		}
 
 
+		//攻撃系
+		C_MidBullet* mb = m_gameScene->GetMidBullet();
+		if (m_strWait <= 0)
+		{
+
+			for (int i = 0; i < mb->GetNum(); i++)
+			{
+				if (mb->GetAlive(i))continue;
+				
+				mb->SetBullet
+				(i, mb->bulletType::straight, 
+				{ m_pos.x, m_pos.y - 50 }, 
+				{ 0,-5 },
+				{ mb->bulletSize::straightX, mb->bulletSize::straightY }, 
+				{ mb->GetRad(mb->bulletRad::straightx),mb->GetRad(mb->bulletRad::straighty) });
+				
+				
+
+				break;
+			}
+
+
+			m_strWait = 30;
+		}
+		if (m_clothWait <= 0)
+		{
+
+			for (int i = 0; i < mb->GetNum(); i++)
+			{
+				if (mb->GetAlive(i))continue;
+
+
+				
+				break;
+			}
+
+			m_clothWait = 60;
+		}
+		if (m_chargeWait <= 0)
+		{
+
+			for (int i = 0; i < mb->GetNum(); i++)
+			{
+				if (mb->GetAlive(i))continue;
+
+
+
+				break;
+			}
+
+			m_chargeWait = 120;
+		}
+
+
+
+
+		//攻撃カウンタ
+		m_strWait--;
+		//m_clothWait--;
+		//m_chargeWait--;
+
+		//揺れカウンタ
 		m_shake--;
 	}
 	

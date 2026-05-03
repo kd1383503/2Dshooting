@@ -50,5 +50,9 @@ private:
 
 	bool m_atk = false;//UŒ‚‹–‰Â
 	int m_shake = 0;
+	
+	int m_strWait = 0;
+	int m_clothWait = 0;
+	int m_chargeWait = 0;
 
 };

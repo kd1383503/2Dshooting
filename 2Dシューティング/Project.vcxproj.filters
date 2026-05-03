@@ -85,6 +85,9 @@
     <Filter Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy">
       <UniqueIdentifier>{a35c38dc-ff9e-469e-8fac-68d2a93f657f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet">
+      <UniqueIdentifier>{aac1761b-38b6-4c33-a53d-1c4982e45c65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -222,6 +225,9 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossEnemy.h">
       <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet\MidBullet.h">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -319,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossEnemy.cpp">
       <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet\MidBullet.cpp">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
