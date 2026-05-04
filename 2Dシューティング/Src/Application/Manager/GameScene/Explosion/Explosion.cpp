@@ -18,7 +18,7 @@ void C_Explosion::Update()
 	for (int i = 0; i < m_expNum; i++)
 	{
 		if (!m_alive[i])continue;
-		m_animCnt[i] += 0.3;
+		m_animCnt[i] += 0.1;
 		if (m_animCnt[i] >= 6.0f)
 		{
 			m_alive[i] = false;

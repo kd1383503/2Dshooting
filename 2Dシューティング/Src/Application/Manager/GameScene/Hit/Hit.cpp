@@ -6,12 +6,18 @@
 #include "../Chara/Player/PlayerBullet/PlayerBullet.h"//Ž©‹@‚Ì’e
 #include "../Chara/Enemy/BasicEnemy/BasicEnemy.h"//ŽG‹›“G
 #include "../Explosion/Explosion.h"//”š”­
+#include "../Chara/Enemy/MidEnemy/MidEnemy.h"//“G‚Q
+#include "../Chara/Enemy/MidEnemy/MidBullet/MidBullet.h"//“G‚Q’e
 
 
 void C_Hit::Update()
 {
 	PlayerBulletToEnemy();
 	PlayerEnemy();
+	PlayerBulletToMidEnemy();
+	StrBulletToPlayer();
+	CloBulletToPlayer();
+	PlayerMidEnemy();
 }
 
 void C_Hit::PlayerBulletToEnemy()
@@ -72,4 +78,152 @@ void C_Hit::PlayerEnemy()
 
 	}
 
+}
+
+void C_Hit::PlayerBulletToMidEnemy()
+{
+
+	C_PlayerBullet* pb = m_gameScene->GetPlayerBullet();
+	C_MidEnemy* me = m_gameScene->GetMidEnemy();
+	C_Explosion* ex = m_gameScene->GetExplosion();
+
+	float top = me->GetPos().y + me->GetRad().y;
+	float bottom = me->GetPos().y - me->GetRad().y;
+	float right = me->GetPos().x + me->GetRad().x;
+	float left = me->GetPos().x - me->GetRad().x;
+
+	if (!me->GetAlive())return;
+
+	for (int i = 0; i < pb->GetBuNum(); i++)
+	{
+		if (!pb->GetAlive(i))continue;
+
+		Math::Vector2 c = { pb->GetPos(i).x ,pb->GetPos(i).y + 14 };
+
+		float clX = clamp(c.x, left, right);
+		float clY = clamp(c.y, bottom, top);
+
+		float dx = c.x - clX;
+		float dy = c.y - clY;
+		float distance = (dx * dx + dy * dy);
+		if ( distance <= pb->GetRadius() * pb->GetRadius()) 
+		{
+			// “–‚½‚è
+			//”š”­ˆ—
+			ex->SetEx(pb->GetPos(i), ex->m_exSize::pb);
+
+			// “–‚½‚è”»’è‚ª¬—§‚µ‚½ê‡‚Ìˆ—
+			pb->SetAlive(i, false);
+			me->SetDamage(pb->GetDamage());
+			break;
+
+		}
+
+	}
+
+
+}
+
+void C_Hit::StrBulletToPlayer()
+{
+
+	C_Player* pl = m_gameScene->GetPlayer();
+	C_MidBullet* mb = m_gameScene->GetMidBullet();
+	C_Explosion* ex = m_gameScene->GetExplosion();
+
+	for (int i = 0; i < mb->GetNum(); i++)
+	{
+		if (!mb->GetAlive(i))continue;
+		if (mb->GetType(i) != mb->bulletType::straight)continue;
+
+		float x = pl->GetPos().x - mb->GetPos(i).x;
+		float y = pl->GetPos().y - mb->GetPos(i).y;
+		float distance = sqrt(x * x + y * y);
+
+		if (distance < pl->GetRadius() + ((mb->GetRad(mb->bulletRad::straightx) - 6) * mb->bulletSize::straightX))
+		{
+			//”š”­ˆ—
+			ex->SetEx(mb->GetPos(i), ex->m_exSize::mb);
+
+			// “–‚½‚è”»’è‚ª¬—§‚µ‚½ê‡‚Ìˆ—
+			mb->SetAlive(i, false);
+			pl->SetDamage(mb->bulletDamage::str);
+			break;
+		}
+
+	}
+
+}
+
+void C_Hit::CloBulletToPlayer()
+{
+
+	C_Player* pl = m_gameScene->GetPlayer();
+	C_MidBullet* mb = m_gameScene->GetMidBullet();
+	C_Explosion* ex = m_gameScene->GetExplosion();
+
+	for (int i = 0; i < mb->GetNum(); i++)
+	{
+		if (!mb->GetAlive(i))continue;
+		if (mb->GetType(i) != mb->bulletType::cloth)continue;
+
+		float x = pl->GetPos().x - mb->GetPos(i).x;
+		float y = pl->GetPos().y - mb->GetPos(i).y;
+		float distance = sqrt(x * x + y * y);
+
+		if (distance < pl->GetRadius() + ((mb->GetRad(mb->bulletRad::clothx) - 6) * mb->bulletSize::clothX))
+		{
+			//”š”­ˆ—
+			ex->SetEx(mb->GetPos(i), ex->m_exSize::mb);
+
+			// “–‚½‚è”»’è‚ª¬—§‚µ‚½ê‡‚Ìˆ—
+			mb->SetAlive(i, false);
+			pl->SetDamage(mb->bulletDamage::clo);
+			break;
+		}
+	}
+}
+
+void C_Hit::PlayerMidEnemy()
+{
+	
+	C_Player* pl = m_gameScene->GetPlayer();
+	C_MidEnemy* me = m_gameScene->GetMidEnemy();
+	C_Explosion* ex = m_gameScene->GetExplosion();
+
+	float top = me->GetPos().y + me->GetRad().y;
+	float bottom = me->GetPos().y - me->GetRad().y;
+	float right = me->GetPos().x + me->GetRad().x;
+	float left = me->GetPos().x - me->GetRad().x;
+
+	if (!me->GetAlive())return;
+
+	Math::Vector2 c = { pl->GetPos().x ,pl->GetPos().y};
+
+	float clX = clamp(c.x, left, right);
+	float clY = clamp(c.y, bottom, top);
+
+	float dx = c.x - clX;
+	float dy = c.y - clY;
+	float distance = (dx * dx + dy * dy);
+	if (distance <= pl->GetRadius() * pl->GetRadius())
+	{
+		// “–‚½‚è
+		//”š”­ˆ—
+		ex->SetEx(pl->GetPos(), ex->m_exSize::pl);
+
+		// “–‚½‚è”»’è‚ª¬—§‚µ‚½ê‡‚Ìˆ—
+		pl->SetAlive(false);
+
+	}
+
+}
+
+
+
+float C_Hit::clamp(float v, float minV, float maxV)
+{
+	if (v < minV) return minV;
+	if (v > maxV) return maxV;
+	return v;
 }

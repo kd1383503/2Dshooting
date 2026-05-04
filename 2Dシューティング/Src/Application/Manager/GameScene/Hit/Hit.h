@@ -15,6 +15,15 @@ public:
 
 	void PlayerBulletToEnemy();// プレイヤーの弾と敵の当たり判定を行う関数
 	void PlayerEnemy();//プレイヤーと敵の当たり判定を行う関数
+	
+	void PlayerBulletToMidEnemy();
+	void StrBulletToPlayer();
+	void CloBulletToPlayer();
+	void PlayerMidEnemy();
+
+
+	//便利関数
+	float clamp(float v, float minV, float MaxV);
 
 	//ゲームシーンのアドレスセッター
 	void SetGameScene(C_GameScene* gameScene)

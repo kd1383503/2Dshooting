@@ -18,7 +18,9 @@ public:
 	
 
 	//ゲッター
-	Math::Vector2 GetPos(int i) { return m_pos; }
+	Math::Vector2 GetPos() { return m_pos; }
+	Math::Vector2 GetRad() { return m_radius; }
+	bool GetAlive() { return m_alive; }
 
 	//セッター
 	void SetHp(int hp) { m_hp = hp; }
@@ -43,7 +45,7 @@ private:
 	Math::Matrix m_mat; // 敵の変換行列の配列
 	Math::Vector2 m_pos; // 敵の位置の配列
 	Math::Vector2 m_move; // 敵の移動量の配列
-	Math::Vector2 m_radius = {}; // 敵の半径の配列
+	Math::Vector2 m_radius = { 200 - 40 ,100 - 30 }; // 敵の半径の配列
 	Math::Vector2 m_size;
 	bool m_alive; // 敵が生きているかどうかを表すフラグの配列
 	int m_hp;//敵の体力

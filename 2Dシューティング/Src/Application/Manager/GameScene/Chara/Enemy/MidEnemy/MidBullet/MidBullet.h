@@ -20,8 +20,8 @@ public:
 	{
 		straightX = 1,
 		straightY = 1,
-		clothX,
-		clothY,
+		clothX = 1,
+		clothY = 1,
 		chargeX,
 		chargeY
 	};
@@ -37,6 +37,11 @@ public:
 		end
 	};
 
+	enum bulletDamage
+	{
+		str = 2,
+		clo = 3
+	};
 
 	void Init();
 	void Action();
@@ -49,15 +54,15 @@ public:
 	void SetPos(int i, Math::Vector2 pos) { m_pos[i] = pos; }
 	void SetMove(int i, Math::Vector2 move) { m_move[i] = move; }
 	void SetType(int i, bulletType type) { m_type[i] = type; }
-
-	void SetBullet(int i, bulletType type, Math::Vector2 pos, Math::Vector2 move, Math::Vector2 size, Math::Vector2 rad);
+	void SetAlive(int i, bool alive) { m_alive[i] = alive; }
+	void SetBullet(int i, bulletType type, Math::Vector2 pos, Math::Vector2 move, Math::Vector2 size, Math::Vector2 rad, float angle);
 
 	//getter
 	int GetNum() { return buNum; }
-	int GetDamage() { return m_damage; }
 	Math::Vector2 GetPos(int i) { return m_pos[i]; }
 	bool GetAlive(int i) { return m_alive[i]; }
 	float GetRad(bulletRad br) { return bRad[br]; }
+	bulletType GetType(int i) { return m_type[i]; }
 
 	//gameScene
 	void SetGameScene(C_GameScene* _gameScene)
@@ -82,12 +87,13 @@ private:
 	Math::Vector2 m_size[buNum];
 	Math::Vector2 m_pos[buNum];
 	Math::Vector2 m_move[buNum];
+	float m_angle[buNum];
 	bool m_alive[buNum];
 	bulletType m_type[buNum];
 
 	Math::Vector2 m_rad[buNum] = {};
 
-	const int m_damage = 10;
-	float bRad[end] = { 16,16, 0,0, 0,0 };
+	
+	float bRad[end] = { 16,16, 16,16, 0,0 };
 
 };

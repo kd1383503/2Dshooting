@@ -2,6 +2,7 @@
 #include "../../../GameScene.h"
 #include "../BasicEnemy/BasicEnemy.h"
 #include "MidBullet/MidBullet.h"
+#include "../../../Explosion/Explosion.h"
 
 void C_MidEnemy::Draw()
 {
@@ -102,7 +103,7 @@ void C_MidEnemy::Action()
 				{ m_pos.x, m_pos.y - 50 }, 
 				{ 0,-5 },
 				{ mb->bulletSize::straightX, mb->bulletSize::straightY }, 
-				{ mb->GetRad(mb->bulletRad::straightx),mb->GetRad(mb->bulletRad::straighty) });
+				{ mb->GetRad(mb->bulletRad::straightx),mb->GetRad(mb->bulletRad::straighty) }, 0);
 				
 				
 
@@ -114,13 +115,39 @@ void C_MidEnemy::Action()
 		}
 		if (m_clothWait <= 0)
 		{
-
+			int loop = 2;
 			for (int i = 0; i < mb->GetNum(); i++)
 			{
 				if (mb->GetAlive(i))continue;
 
-
+				if (loop == 2)
+				{
+					mb->SetBullet
+					(i, mb->bulletType::cloth,
+					{ m_pos.x + 30, m_pos.y - 80 },
+					{ -5,-5 },
+					{ mb->bulletSize::clothX, mb->bulletSize::clothY },
+					{ mb->GetRad(mb->bulletRad::clothx),mb->GetRad(mb->bulletRad::clothy) }, -45);
+					
+					loop--;
+					continue;
+				}
 				
+
+				if (loop == 1)
+				{
+					mb->SetBullet
+					(i, mb->bulletType::cloth,
+					{ m_pos.x - 30, m_pos.y - 80 },
+					{ 5,-5 },
+					{ mb->bulletSize::clothX, mb->bulletSize::clothY },
+					{ mb->GetRad(mb->bulletRad::clothx),mb->GetRad(mb->bulletRad::clothy) }, 45);
+
+					loop--;
+				}
+
+
+				if (loop > 0)continue;
 				break;
 			}
 
@@ -146,7 +173,7 @@ void C_MidEnemy::Action()
 
 		//攻撃カウンタ
 		m_strWait--;
-		//m_clothWait--;
+		m_clothWait--;
 		//m_chargeWait--;
 
 		//揺れカウンタ
@@ -182,6 +209,14 @@ void C_MidEnemy::Update()
 	{
 		m_alive = false;
 		be->SetKill(0);
+		C_Explosion* ex = m_gameScene->GetExplosion();
+
+		ex->SetEx(m_pos, ex->m_exSize::me);
+		ex->SetEx({m_pos.x + 100,m_pos.y + 50}, ex->m_exSize::me);
+		ex->SetEx({m_pos.x + 100,m_pos.y - 50}, ex->m_exSize::me);
+		ex->SetEx({m_pos.x - 100,m_pos.y + 50}, ex->m_exSize::me);
+		ex->SetEx({m_pos.x - 100,m_pos.y - 50}, ex->m_exSize::me);
+
 	}
 	
 

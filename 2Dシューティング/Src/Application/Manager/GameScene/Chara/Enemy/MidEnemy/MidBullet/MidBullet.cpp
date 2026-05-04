@@ -132,7 +132,8 @@ void C_MidBullet::MatUpdate()
 			{
 				Math::Matrix scale = Math::Matrix::CreateScale(m_size[i].x, m_size[i].y, 0);
 				Math::Matrix trans = Math::Matrix::CreateTranslation(m_pos[i].x, m_pos[i].y, 0);
-				m_mat[i] = scale * trans;
+				Math::Matrix rotate = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(m_angle[i]));
+				m_mat[i] = scale * rotate * trans;
 				break;
 			}
 			case bulletType::charge:
@@ -152,6 +153,7 @@ void C_MidBullet::Init()
 {
 
 	m_strTex.Load("Asset/texture/GameScene/Bullet/midBullet.png");
+	m_cloTex.Load("Asset/texture/GameScene/Bullet/midBullet2.png");
 
 	for (int i = 0; i < buNum; i++)
 	{
@@ -161,12 +163,13 @@ void C_MidBullet::Init()
 		m_type[i] = bulletType::straight;
 		m_size[i] = {};
 		m_rad[i] = {};
+		m_angle[i] = {};
 	}
 
 
 }
 
-void C_MidBullet::SetBullet(int i, bulletType type, Math::Vector2 pos, Math::Vector2 move, Math::Vector2 size, Math::Vector2 rad)
+void C_MidBullet::SetBullet(int i, bulletType type, Math::Vector2 pos, Math::Vector2 move, Math::Vector2 size, Math::Vector2 rad, float angle)
 {
 
 	m_alive[i] = true;
@@ -175,6 +178,7 @@ void C_MidBullet::SetBullet(int i, bulletType type, Math::Vector2 pos, Math::Vec
 	m_type[i] = type;
 	m_size[i] = size;
 	m_rad[i] = rad;
+	m_angle[i] = angle;
 }
 
 void C_MidBullet::Release()
