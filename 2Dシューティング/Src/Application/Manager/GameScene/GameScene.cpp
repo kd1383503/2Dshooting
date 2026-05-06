@@ -8,6 +8,9 @@
 #include "Chara/Enemy/BasicEnemy/BasicEnemy.h"//雑魚敵クラスのインクルード
 #include "Chara/Enemy/MidEnemy/MidEnemy.h"//敵クラスのインクルード
 #include "Chara/Enemy/MidEnemy/MidBullet/MidBullet.h"
+#include "Chara/Enemy/BossEnemy/BossEnemy.h"
+#include "Chara/Enemy/BossEnemy/BossBullet/BossBullet.h"
+#include "Chara/Enemy/BossEnemy/BossLaser/BossLaser.h"
 
 #include "Hit/Hit.h"//当たり判定クラスのインクルード
 #include "Explosion/Explosion.h"//爆発処理クラスのインクルード
@@ -27,6 +30,9 @@ void C_GameScene::Draw()
 	m_midBullet->Draw();
 	m_basicEnemy->Draw();//敵
 	m_midEnemy->Draw();//敵
+	m_boss->Draw();
+	m_bossBullet->Draw();
+	m_laser->Draw();
 
 
 	m_exp->Draw();//爆発
@@ -46,7 +52,10 @@ void C_GameScene::Update()
 		m_basicEnemy->Action();
 		m_midEnemy->Action();
 		m_midBullet->Action();
-		
+		m_boss->Action();
+		m_bossBullet->Action();
+		m_laser->Action();
+
 
 		m_player->Update();
 		m_pBullet->Update();
@@ -54,6 +63,9 @@ void C_GameScene::Update()
 		m_basicEnemy->Update();
 		m_midEnemy->Update();
 		m_midBullet->Update();
+		m_boss->Update();
+		m_bossBullet->Update();
+		m_laser->Update();
 
 		m_hit->Update();//当たり判定を行う関数
 
@@ -68,6 +80,13 @@ void C_GameScene::Update()
 		{
 			SCENE.SetResult(false);//敗北をセット
 			SCENEMANAGER.ChangeState(new C_ResultScene());
+			return;
+		}
+		if (!m_boss->GetAlive() && m_boss->GetDefeat())
+		{
+			SCENE.SetResult(true);//クリアをセット
+			SCENEMANAGER.ChangeState(new C_ResultScene);
+			return;
 		}
 
 	}//ゲームのメイン部分はこの中に書く
@@ -90,6 +109,9 @@ void C_GameScene::MatUpdate()
 	m_basicEnemy->MatUpdate();
 	m_midEnemy->MatUpdate();
 	m_midBullet->MatUpdate();
+	m_boss->MatUpdate();
+	m_bossBullet->MatUpdate();
+	m_laser->MatUpdate();
 
 	m_exp->MatUpdate();
 
@@ -122,12 +144,24 @@ void C_GameScene::Init()
 	m_midEnemy = new C_MidEnemy;
 	m_midEnemy->SetGameScene(this);
 	m_midEnemy->Init();
-
+	
+	//boss
+	m_boss = new C_BossEnemy;
+	m_boss->SetGameScene(this);
+	m_boss->Init();
+	
 	//敵の弾
 	m_midBullet = new C_MidBullet;
 	m_midBullet->SetGameScene(this);
 	m_midBullet->Init();
 
+	m_bossBullet = new C_BossBullet;
+	m_bossBullet->SetGameScene(this);
+	m_bossBullet->Init();
+
+	m_laser = new C_BossLaser;
+	m_laser->Init();
+	
 
 	//当たり判定
 	m_hit = new C_Hit;
@@ -147,15 +181,27 @@ void C_GameScene::Release()
 {
 
 	if(m_player != nullptr) delete m_player;
+	m_player = nullptr;
 	if (m_pBullet != nullptr) delete m_pBullet;
+	m_pBullet = nullptr;
 
 	if (m_basicEnemy != nullptr) delete m_basicEnemy;
+	m_basicEnemy = nullptr;
 	if (m_midEnemy != nullptr) delete m_midEnemy;
+	m_midEnemy = nullptr;
 	if (m_midBullet != nullptr) delete m_midBullet;
+	m_midBullet = nullptr;
+	if (m_boss != nullptr) delete m_boss;
+	m_boss = nullptr;
+	if (m_bossBullet != nullptr) delete m_bossBullet;
+	m_bossBullet = nullptr;
+	if (m_laser != nullptr) delete m_laser;
+	m_laser = nullptr;
 
 	if (m_hit != nullptr) delete m_hit;
+	m_hit = nullptr;
 	if (m_exp != nullptr) delete m_exp;
-
+	m_exp = nullptr;
 	if (m_back != nullptr) delete m_back;
 	
 

@@ -50,4 +50,7 @@ private:
 	float m_radius = 32; // ƒvƒŒƒCƒ„[‚Ì”¼Œa
 	Math::Vector2 m_anim = {0,0};
 
+	bool m_lose;
+	float m_loseCnt;
+
 };

@@ -8,6 +8,9 @@ class C_PlayerBullet; // プレイヤーの弾のクラスの前方宣言
 class C_BasicEnemy; // 敵のクラスの前方宣言
 class C_MidEnemy; //敵クラス2の前方宣言
 class C_MidBullet;//midenemyの弾クラスの前方宣言
+class C_BossEnemy;//ボスクラスの前方宣言
+class C_BossBullet;
+class C_BossLaser;
 
 class C_Hit; // 当たり判定のクラスの前方宣言
 class C_Explosion;//爆発エフェクトクラスの前方宣言
@@ -45,6 +48,9 @@ public:
 	C_BasicEnemy* GetBasicEnemy() { return m_basicEnemy; } // 敵のポインタを返す関数
 	C_MidEnemy* GetMidEnemy() { return m_midEnemy; }
 	C_MidBullet* GetMidBullet() { return m_midBullet; }
+	C_BossEnemy* GetBoss() { return m_boss; }
+	C_BossBullet* GetBossBullet() { return m_bossBullet; }
+	C_BossLaser* GetLaser() { return m_laser; }
 
 	C_Explosion* GetExplosion() { return m_exp; }//爆発クラスのポインタを返す関数
 
@@ -57,6 +63,9 @@ private:
 	C_BasicEnemy* m_basicEnemy = nullptr; // 敵のポインタ
 	C_MidEnemy* m_midEnemy = nullptr;//敵ポインタ２
 	C_MidBullet* m_midBullet = nullptr;//midenemyの弾ポインタ
+	C_BossEnemy* m_boss = nullptr;//bossポインタ
+	C_BossBullet* m_bossBullet = nullptr;//ボスの弾ポインタ
+	C_BossLaser* m_laser = nullptr;
 
 	C_Hit* m_hit = nullptr; // 当たり判定のポインタ
 	C_Explosion* m_exp = nullptr; //爆発処理のポインタ

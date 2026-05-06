@@ -85,6 +85,13 @@ public:
 		DrawTex(tex, 0, 0, srcRect.width, srcRect.height, &srcRect, &Math::Color(1, 1, 1, alpha), pivot);
 	}
 
+	//描画の基準点変更
+	void DrawTexReferencePoint(const KdTexture* tex, const Math::Rectangle& srcRect = { 0,0,0,0 }, const float alpha = 1.0f, const Math::Vector2& pivot = { 0.5, 1.0f })
+	{
+		if (tex == nullptr)return;
+		DrawTex(tex, 0, 0, srcRect.width, srcRect.height, &srcRect, &Math::Color(1, 1, 1, alpha), pivot);
+	}
+
 	//４・５月の授業用文字表示
 	void DrawString(float _x, float _y, const char _text[], const Math::Vector4& _color)
 	{

@@ -3,6 +3,7 @@
 #include "../BasicEnemy/BasicEnemy.h"
 #include "MidBullet/MidBullet.h"
 #include "../../../Explosion/Explosion.h"
+#include "../BossEnemy/BossEnemy.h"
 
 void C_MidEnemy::Draw()
 {
@@ -20,8 +21,9 @@ void C_MidEnemy::Action()
 {
 
 	C_BasicEnemy* be = m_gameScene->GetBasicEnemy();
-	
-	if (be->GetKill() >= 1)//もしキルカウントが条件数を満たしたら
+	C_BossEnemy* bs = m_gameScene->GetBoss();
+
+	if (!bs->GetAlive() && be->GetKill() >= 1)//もしキルカウントが条件数を満たしたら
 	{
 
 		if (!m_alive)
@@ -210,6 +212,8 @@ void C_MidEnemy::Update()
 		m_alive = false;
 		be->SetKill(0);
 		C_Explosion* ex = m_gameScene->GetExplosion();
+
+		m_kill++;
 
 		ex->SetEx(m_pos, ex->m_exSize::me);
 		ex->SetEx({m_pos.x + 100,m_pos.y + 50}, ex->m_exSize::me);

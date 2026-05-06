@@ -21,6 +21,7 @@ public:
 	Math::Vector2 GetPos() { return m_pos; }
 	Math::Vector2 GetRad() { return m_radius; }
 	bool GetAlive() { return m_alive; }
+	int GetKill() { return m_kill; }
 
 	//セッター
 	void SetHp(int hp) { m_hp = hp; }
@@ -56,5 +57,8 @@ private:
 	int m_strWait = 0;
 	int m_clothWait = 0;
 	int m_chargeWait = 0;
+
+	//ボス出現
+	int m_kill = 1;
 
 };

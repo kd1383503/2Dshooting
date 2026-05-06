@@ -88,6 +88,12 @@
     <Filter Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet">
       <UniqueIdentifier>{aac1761b-38b6-4c33-a53d-1c4982e45c65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossBullet">
+      <UniqueIdentifier>{9ae8c095-9e7d-4b7d-99c7-4810621d3db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser">
+      <UniqueIdentifier>{c918da0d-e936-4e1f-a305-95217228e57d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -228,6 +234,12 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet\MidBullet.h">
       <Filter>Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossBullet\BossBullet.h">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser\BossLaser.h">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -328,6 +340,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet\MidBullet.cpp">
       <Filter>Src\Application\Manager\GameScene\Chara\Enemy\MidEnemy\MidBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossBullet\BossBullet.cpp">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser\BossLaser.cpp">
+      <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

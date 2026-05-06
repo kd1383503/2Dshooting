@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "../../GameScene.h"
 #include "PlayerBullet/PlayerBullet.h"
+#include "../../Explosion/Explosion.h"
 
 void C_Player::Init()
 {
@@ -12,6 +13,9 @@ void C_Player::Init()
 	m_hp = 10;
 	m_alive = true;
 	m_scale = { 1.33f, 1.33f };
+
+	m_lose = false;
+	m_loseCnt = 0;
 
 }
 
@@ -52,7 +56,22 @@ void C_Player::Update()
 	}
 
 
-	if (m_hp <= 0) m_alive = false;
+	if (m_hp <= 0 && !m_lose)
+	{
+		m_lose = true;
+		m_loseCnt = 60;
+		C_Explosion* ex = m_gameScene->GetExplosion();
+		ex->SetEx(m_pos, ex->m_exSize::pl);
+	}
+
+	if (m_lose)
+	{
+		if (m_loseCnt <= 0)
+		{
+			m_alive = false;
+		}
+		m_loseCnt--;
+	}
 
 }
 

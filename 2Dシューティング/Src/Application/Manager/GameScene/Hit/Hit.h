@@ -21,6 +21,12 @@ public:
 	void CloBulletToPlayer();
 	void PlayerMidEnemy();
 
+	void PlayerBulletToBossMain();
+	void PlayerBulletToRightArm();
+	void PlayerBulletToLeftArm();
+	void BossBulletToPlayer();
+	void BossLaserToPlayer();
+
 
 	//ï÷óòä÷êî
 	float clamp(float v, float minV, float MaxV);

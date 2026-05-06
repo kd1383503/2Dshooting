@@ -3,6 +3,7 @@
 
 #include "../../../GameScene.h"
 #include "../../../Explosion/Explosion.h"
+#include "../BossEnemy/BossEnemy.h"
 
 void C_BasicEnemy::Draw()
 {
@@ -93,33 +94,37 @@ void C_BasicEnemy::Update()
 	std::random_device rd;
 	std::mt19937 mt(rd());
 	std::uniform_int_distribution<int> dist(1, 100);
+	
+	C_BossEnemy* bs = m_gameScene->GetBoss();
 
-	if (dist(mt) <= 10) {
-		// 20% の確率
-		for (int i = 0; i < enemyNum; i++)
-		{
-			if (m_alive[i])continue;//生きてたらスルー
-			
-			std::mt19937 mt(rd());
-			std::uniform_int_distribution<int> dist(1, 2);
-
-			switch (dist(mt))
+	if (!bs->GetAlive())
+	{
+		if (dist(mt) <= 10) {
+			// 20% の確率
+			for (int i = 0; i < enemyNum; i++)
 			{
-			case 1:
-				EnemyInit(i, enemyType::basic);
-				break;
-			case 2:
-				EnemyInit(i, enemyType::shake);
-				break;
-			case 3:
-				EnemyInit(i, enemyType::uni);
-				break;
-			}
-			break;
+				if (m_alive[i])continue;//生きてたらスルー
 
+				std::mt19937 mt(rd());
+				std::uniform_int_distribution<int> dist(1, 2);
+
+				switch (dist(mt))
+				{
+				case 1:
+					EnemyInit(i, enemyType::basic);
+					break;
+				case 2:
+					EnemyInit(i, enemyType::shake);
+					break;
+				case 3:
+					EnemyInit(i, enemyType::uni);
+					break;
+				}
+				break;
+
+			}
 		}
 	}
-
 	
 	
 	for (int i = 0; i < enemyNum; i++)
@@ -133,7 +138,8 @@ void C_BasicEnemy::Update()
 			{
 				m_pos[i] += m_move[i];
 
-				if (m_pos[i].y < -360 - 32) m_pos[i].y = 360 + 32;
+				if (m_pos[i].y < -360 - 32) m_alive[i] = false;
+
 
 				if (m_hp[i] <= 0)
 				{
@@ -154,7 +160,7 @@ void C_BasicEnemy::Update()
 
 				if (640 - 32 < m_pos[i].x)m_pos[i].x = 640 - 32;
 				if (-640 + 32 > m_pos[i].x)m_pos[i].x = -640 + 32;
-				if (m_pos[i].y < -360 - 32) m_pos[i].y = 360 + 32;
+				if (m_pos[i].y < -360 - 32) m_alive[i] = false;
 
 				if (m_hp[i] <= 0)
 				{
