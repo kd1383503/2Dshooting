@@ -39,8 +39,8 @@ public:
 
 	enum bulletDamage
 	{
-		str = 2,
-		clo = 3
+		str = 1,
+		clo = 1
 	};
 
 	void Init();

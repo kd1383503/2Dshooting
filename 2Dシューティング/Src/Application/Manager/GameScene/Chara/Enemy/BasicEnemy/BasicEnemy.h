@@ -32,6 +32,11 @@ public:
 	void SetHp(int i, int hp) { m_hp[i] = hp; }
 	void SetDamage(int i, int damage) { m_hp[i] -= damage; }
 	void SetKill(int i) { m_killCnt = i; }
+	void SetHit(int i, bool flg)
+	{
+		m_hit[i] = flg;
+		m_cnt[i] = 3;
+	}
 
 	//gamescene setter
 	void SetGameScene(C_GameScene* gameScene)
@@ -53,6 +58,8 @@ private:
 
 	C_GameScene* m_gameScene = nullptr;
 
+	KdTexture m_tex2;
+
 	static const int enemyNum = 10; // 敵の数
 	Math::Matrix m_mat[enemyNum]; // 敵の変換行列の配列
 	Math::Vector2 m_pos[enemyNum]; // 敵の位置の配列
@@ -61,9 +68,12 @@ private:
 	bool m_alive[enemyNum]; // 敵が生きているかどうかを表すフラグの配列
 	int m_hp[enemyNum];//敵の体力
 	int m_enemyType[enemyNum];//タイプごとに画像と動きを変える
-
+	float m_anim[enemyNum];
 
 	int m_shakeCnt[enemyNum] = {};//
+
+	bool m_hit[enemyNum] = {};
+	int m_cnt[enemyNum] = {};
 
 
 	int m_killCnt = 0; //ベーシックエネミーが倒されたら１カウント

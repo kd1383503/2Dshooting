@@ -10,8 +10,28 @@ void C_MidEnemy::Draw()
 
 	
 	if (!m_alive)return;
+	Math::Color col = {};
+	if (m_hit)
+	{
+		col = { 1,0,0,1.0f };
+		m_cnt--;
+		if (m_cnt <= 0) m_hit = false;
+	}
+	else
+	{
+		col = { 1,1,1,1.0f };
+	}
+
 	SHADER.m_spriteShader.SetMatrix(m_mat);
-	SHADER.m_spriteShader.DrawTex(&m_tex, Math::Rectangle(0, 0, 400, 200), 1.0f);
+	SHADER.m_spriteShader.DrawTex(&m_tex, Math::Rectangle(0, 0, 400, 200), &col);
+
+	
+	SHADER.m_spriteShader.SetMatrix(m_enMat);
+	SHADER.m_spriteShader.DrawTex(&m_enTex, Math::Rectangle((int)m_anim * 48, 0, 48, 48), 1.0f);
+
+	
+	SHADER.m_spriteShader.SetMatrix(m_enMat2);
+	SHADER.m_spriteShader.DrawTex(&m_enTex, Math::Rectangle((int)m_anim * 48, 0, 48, 48), 1.0f);
 
 	
 
@@ -23,7 +43,7 @@ void C_MidEnemy::Action()
 	C_BasicEnemy* be = m_gameScene->GetBasicEnemy();
 	C_BossEnemy* bs = m_gameScene->GetBoss();
 
-	if (!bs->GetAlive() && be->GetKill() >= 1)//もしキルカウントが条件数を満たしたら
+	if (!bs->GetAlive() && be->GetKill() >= 10)//もしキルカウントが条件数を満たしたら
 	{
 
 		if (!m_alive)
@@ -204,6 +224,8 @@ void C_MidEnemy::Update()
 	if (m_pos.x > 440) m_pos.x = 440;
 	if (m_pos.x < -440) m_pos.x = -440;
 
+	m_anim += 0.1f;
+	if (m_anim >= 3.0f)m_anim = 0.0f;
 
 	C_BasicEnemy* be = m_gameScene->GetBasicEnemy();
 
@@ -214,6 +236,9 @@ void C_MidEnemy::Update()
 		C_Explosion* ex = m_gameScene->GetExplosion();
 
 		m_kill++;
+
+		//スコアセット
+		m_gameScene->SetScore(3000);
 
 		ex->SetEx(m_pos, ex->m_exSize::me);
 		ex->SetEx({m_pos.x + 100,m_pos.y + 50}, ex->m_exSize::me);
@@ -234,7 +259,14 @@ void C_MidEnemy::MatUpdate()
 	Math::Matrix scale = Math::Matrix::CreateScale(m_size.x, m_size.y, 0);
 	m_mat = scale * trans;
 
-	
+	trans = Math::Matrix::CreateTranslation(m_pos.x + 65, m_pos.y + 103, 0);
+	scale = Math::Matrix::CreateScale(m_size.x, -m_size.y, 0);
+	m_enMat = scale * trans;
+
+	trans = Math::Matrix::CreateTranslation(m_pos.x - 65, m_pos.y + 103, 0);
+	scale = Math::Matrix::CreateScale(m_size.x, -m_size.y, 0);
+	m_enMat2 = scale * trans;
+
 
 }
 
@@ -242,15 +274,17 @@ void C_MidEnemy::Init()
 {
 
 	m_tex.Load("Asset/texture/GameScene/Chara/Enemy/midBoss.png");
-
+	m_enTex.Load("Asset/texture/GameScene/Chara/Enemy/engine.png");
 	
+
 	m_pos = {};
 	m_move = {};
 	m_alive = false;
 	m_size = { 1,1 };
 	m_hp = 100;
 
-	
+	m_anim = 0;
+
 	m_size = { 1,1 };
 
 }
@@ -259,5 +293,6 @@ void C_MidEnemy::Release()
 {
 
 	m_tex.Release();
+	m_enTex.Release();
 
 }

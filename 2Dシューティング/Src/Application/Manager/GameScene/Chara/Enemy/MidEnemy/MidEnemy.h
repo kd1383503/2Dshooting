@@ -28,6 +28,12 @@ public:
 	void SetDamage(int damage) { m_hp -= damage; }
 	void SetAlive(bool alive) { m_alive = alive; }
 
+	void SetHit(bool flg) 
+	{ 
+		m_hit = flg; 
+		m_cnt = 3;
+	}
+
 	//ゲームシーンセッター
 	void SetGameScene(C_GameScene* gameScene)
 	{
@@ -51,6 +57,12 @@ private:
 	bool m_alive; // 敵が生きているかどうかを表すフラグの配列
 	int m_hp;//敵の体力
 
+	//engine
+	KdTexture m_enTex;
+	Math::Matrix m_enMat;
+	Math::Matrix m_enMat2;
+	float m_anim;
+
 	bool m_atk = false;//攻撃許可
 	int m_shake = 0;
 	
@@ -59,6 +71,9 @@ private:
 	int m_chargeWait = 0;
 
 	//ボス出現
-	int m_kill = 1;
+	int m_kill = 0;
+
+	bool m_hit = false;;
+	int m_cnt = 0;
 
 };

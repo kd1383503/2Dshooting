@@ -1,4 +1,6 @@
 #include"BossLaser.h"
+#include "../../../../GameScene.h"
+#include "../BossEnemy.h"
 
 void C_BossLaser::Draw() 
 {
@@ -28,6 +30,9 @@ void C_BossLaser::Update()
 		m_alive = false;
 		m_hitjudge = false;
 		m_hit = false;
+		C_BossEnemy* bs = m_gameScene->GetBoss();
+		bs->SetLaserFlg(false);
+
 	}
 
 }

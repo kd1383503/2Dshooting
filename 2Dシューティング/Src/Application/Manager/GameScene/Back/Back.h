@@ -9,17 +9,21 @@ class C_Back
 	void MatUpdate();
 	void Update();
 	void Draw();
+
 private:
 	
 	void Release();
 
 	KdTexture m_tex; // ”wŒi‚ÌƒeƒNƒXƒ`ƒƒ
+	
+
 	Math::Vector2 m_pos; // ”wŒi‚ÌˆÊ’u
 	Math::Vector2 m_pos2; // ”wŒi2‚ÌˆÊ’u
 	Math::Matrix m_mat; // ”wŒi‚Ì•ÏŠ·s—ñ
 	Math::Matrix m_mat2; // ”wŒi2‚Ì•ÏŠ·s—ñ
 
+	
 
-	const float m_scroll = 3.0f; // ”wŒi‚ÌƒXƒNƒ[ƒ‹‘¬“x
+	const float m_scroll = 5.0f; // ”wŒi‚ÌƒXƒNƒ[ƒ‹‘¬“x
 
 };

@@ -26,6 +26,9 @@ public:
 	void PlayerBulletToLeftArm();
 	void BossBulletToPlayer();
 	void BossLaserToPlayer();
+	void PlayerBossMain();
+	void PlayerRightArm();
+	void PlayerLeftArm();
 
 
 	//ï÷óòä÷êî

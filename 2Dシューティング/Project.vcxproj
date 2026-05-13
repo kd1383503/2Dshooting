@@ -172,6 +172,9 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Explosion\Explosion.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\GameScene.h" />
     <ClInclude Include="Src\Application\Manager\GameScene\Hit\Hit.h" />
+    <ClInclude Include="Src\Application\Manager\GameScene\UI\PlayerHp\PlayerHp.h" />
+    <ClInclude Include="Src\Application\Manager\GameScene\UI\Score\Score.h" />
+    <ClInclude Include="Src\Application\Manager\GameScene\Warning\Warning.h" />
     <ClInclude Include="Src\Application\Manager\ResultScene\ResultScene.h" />
     <ClInclude Include="Src\Application\Manager\SceneManager.h" />
     <ClInclude Include="Src\Application\Manager\StateScene.h" />
@@ -213,6 +216,9 @@
     <ClCompile Include="Src\Application\Manager\GameScene\Explosion\Explosion.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\GameScene.cpp" />
     <ClCompile Include="Src\Application\Manager\GameScene\Hit\Hit.cpp" />
+    <ClCompile Include="Src\Application\Manager\GameScene\UI\PlayerHp\PlayerHp.cpp" />
+    <ClCompile Include="Src\Application\Manager\GameScene\UI\Score\Score.cpp" />
+    <ClCompile Include="Src\Application\Manager\GameScene\Warning\Warning.cpp" />
     <ClCompile Include="Src\Application\Manager\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Src\Application\Manager\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Src\Application\Scene.cpp" />

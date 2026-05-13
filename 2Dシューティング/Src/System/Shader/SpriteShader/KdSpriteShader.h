@@ -84,6 +84,12 @@ public:
 		if (tex == nullptr)return;
 		DrawTex(tex, 0, 0, srcRect.width, srcRect.height, &srcRect, &Math::Color(1, 1, 1, alpha), pivot);
 	}
+	//色変更
+	void DrawTex(const KdTexture* tex, const Math::Rectangle& srcRect = { 0,0,0,0 }, Math::Color* color = &Math::Color(1, 1, 1, 1), const Math::Vector2& pivot = { 0.5, 0.5f })
+	{
+		if (tex == nullptr)return;
+		DrawTex(tex, 0, 0, srcRect.width, srcRect.height, &srcRect, color, pivot);
+	}
 
 	//描画の基準点変更
 	void DrawTexReferencePoint(const KdTexture* tex, const Math::Rectangle& srcRect = { 0,0,0,0 }, const float alpha = 1.0f, const Math::Vector2& pivot = { 0.5, 1.0f })

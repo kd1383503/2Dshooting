@@ -41,7 +41,17 @@ public:
 	void SetHp(int hp) { m_hp = hp; }
 	void SetDamage(int damage) { m_hp -= damage; }
 	void SetAlive(bool alive) { m_alive = alive; }
+	void SetLaserFlg(bool flg) { m_laserFlg = flg; }
+	void SetHit(bool flg)
+	{
+		m_hit = flg;
+		m_cnt = 4;
+	}
 
+	//warning
+	void SetStart() { m_start = true; }
+	void SetWarning() { m_warning = false; }
+	bool GetWarning() { return m_warning; }
 
 	//gamesceneSet
 	void SetGameScene(C_GameScene* _gameScene)
@@ -58,6 +68,10 @@ private:
 
 	Math::Vector2 m_radius = {400 , 177};
 	Math::Vector2 m_size = { 0.75, 0.75};
+	
+	KdTexture m_enTex;
+	Math::Matrix m_enMat;
+	float m_anim;
 
 	//arm
 	KdTexture m_rightArmTex;
@@ -78,6 +92,7 @@ private:
 	float m_targetAngleL = 0;
 
 	float m_laserPosY;
+	bool m_laserFlg;
 
 	int m_buAtkTime = 0;
 	int m_laserAtkTime = 0;
@@ -90,5 +105,12 @@ private:
 	bool m_defeat;
 	int m_defeatCnt;
 	float m_alpha;
+
+
+	bool m_warning;
+	bool m_start;
+
+	bool m_hit = {};
+	int m_cnt = 0;
 
 };

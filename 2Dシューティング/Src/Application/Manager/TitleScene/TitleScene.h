@@ -1,6 +1,8 @@
 #pragma once
 #include"../StateScene.h"
 
+class C_Back;
+
 class C_TitleScene : public C_StateScene
 {
 public:
@@ -20,6 +22,7 @@ private:
 	KdTexture m_pressEnterTex;		// Press Enterのテクスチャ
 
 	Math::Matrix m_mat;				// タイトルの行列
+	Math::Matrix m_matS;
 	Math::Vector2 m_pos;			// タイトルの位置
 
 
@@ -28,6 +31,7 @@ private:
 	float m_pressEnterAlpha;		// Press Enterのアルファ値
 	float m_addAlpha;				// Press Enterのアルファ値の増減量
 
+	C_Back* m_back = nullptr;
 
 
 };

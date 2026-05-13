@@ -14,15 +14,23 @@ void C_Player::Init()
 	m_alive = true;
 	m_scale = { 1.33f, 1.33f };
 
+	m_alpha = 1.0f;
+
 	m_lose = false;
 	m_loseCnt = 0;
+
+	m_hit = false;
+	m_addAlpha = 0.05;
+	m_hitCnt = 0;
 
 }
 
 void C_Player::Action()
 {
-
-	ControlPlayer();
+	if (!m_lose)
+	{
+		ControlPlayer();
+	}
 }
 
 void C_Player::MatUpdate()
@@ -56,12 +64,39 @@ void C_Player::Update()
 	}
 
 
+	if (m_hit)
+	{
+		m_alpha += m_addAlpha;
+		if (m_alpha >= 1.0f)
+		{
+			m_alpha = 1.0f;
+			m_addAlpha = -0.1f;
+		}
+		if (m_alpha <= 0.0f)
+		{
+			m_alpha = 0.0f;
+			m_addAlpha = 0.1f;
+		}
+		m_hitCnt--;
+		if (m_hitCnt <= 0)
+		{
+			m_hit = false;
+		}
+	}
+
+
+	if (m_hp <= 0) m_hp = 1;
+
+	if (GetAsyncKeyState('O') & 0x8000) m_hp = 0;
+
 	if (m_hp <= 0 && !m_lose)
 	{
 		m_lose = true;
 		m_loseCnt = 60;
 		C_Explosion* ex = m_gameScene->GetExplosion();
 		ex->SetEx(m_pos, ex->m_exSize::pl);
+
+		m_move = {};
 	}
 
 	if (m_lose)
@@ -71,6 +106,7 @@ void C_Player::Update()
 			m_alive = false;
 		}
 		m_loseCnt--;
+		m_alpha *= 0.9;
 	}
 
 }
@@ -81,7 +117,7 @@ void C_Player::Draw()
 	if (m_alive)
 	{
 		SHADER.m_spriteShader.SetMatrix(m_mat);
-		SHADER.m_spriteShader.DrawTex(&m_tex, Math::Rectangle((int)m_anim.x * 48, (int)m_anim.y * 58, 48, 58), 1.0f);
+		SHADER.m_spriteShader.DrawTex(&m_tex, Math::Rectangle((int)m_anim.x * 48, (int)m_anim.y * 58, 48, 58), m_alpha);
 	}
 
 }

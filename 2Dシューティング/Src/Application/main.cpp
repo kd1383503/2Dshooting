@@ -33,7 +33,7 @@ bool Application::Init(int w, int h)
 	//===================================================================
 	// ウィンドウ作成
 	//===================================================================
-	if (m_window.Create(w, h, "Space Abyss", "Window") == false) {
+	if (m_window.Create(w, h, "space fighter", "Window") == false) {
 		MessageBoxA(nullptr, "ウィンドウ作成に失敗", "エラー", MB_OK);
 		return false;
 	}
@@ -102,6 +102,8 @@ bool Application::Init(int w, int h)
 		io.Fonts->AddFontDefault();
 		io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msgothic.ttc", 13.0f, &config, glyphRangesJapanese);
 	}
+
+	ShowCursor(false);
 
 	return true;
 }
@@ -246,6 +248,11 @@ void Application::Execute()
 			baseTime = st;
 			count = 0;
 		}
+
+		
+		// タイトルバーにFPS表示
+		std::string titleBer = "SPACE FIGHTER　FPS : " + std::to_string(m_fps);
+		SetWindowTextA(m_window.GetWndHandle(), titleBer.c_str());
 
 	}
 

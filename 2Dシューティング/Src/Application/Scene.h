@@ -20,10 +20,17 @@ public:
 	//リザルトシーンに結果を持っていく用
 	bool GetResult() { return m_result; }
 
+	bool GetEnter() { return m_enter; }
+	void SetEnter(bool en) { m_enter = en; }
+
+	void SetScore(unsigned int score) { m_score = score; }
+	unsigned int GetScore() { return m_score; }
+
 private:
 
 	bool m_result = true;//true:クリア false:ゲームオーバー
-
+	bool m_enter = true;
+	unsigned int m_score = 0;
 
 private:
 

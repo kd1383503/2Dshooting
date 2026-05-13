@@ -26,6 +26,9 @@ void C_Hit::Update()
 	PlayerBulletToLeftArm();
 	BossBulletToPlayer();
 	BossLaserToPlayer();
+	PlayerBossMain();
+	PlayerRightArm();
+	PlayerLeftArm();
 }
 
 void C_Hit::PlayerBulletToEnemy()
@@ -51,9 +54,12 @@ void C_Hit::PlayerBulletToEnemy()
 			{
 				//爆発処理
 				ex->SetEx(pb->GetPos(i), ex->m_exSize::pb);
-				
+
 				// 当たり判定が成立した場合の処理
+				be->SetHit(j, true);
 				pb->SetAlive(i, false);
+				//スコアセット
+				m_gameScene->SetScore(50);
 				be->SetDamage(j, pb->GetDamage());
 				break;
 			}
@@ -67,20 +73,25 @@ void C_Hit::PlayerEnemy()
 {
 
 	C_Player* pl = m_gameScene->GetPlayer();
-	C_BasicEnemy* pb = m_gameScene->GetBasicEnemy();
+	C_BasicEnemy* be = m_gameScene->GetBasicEnemy();
+	C_Explosion* ex = m_gameScene->GetExplosion();
 
-	for (int i = 0; i < pb->GetEnemyNum(); i++)
+	for (int i = 0; i < be->GetEnemyNum(); i++)
 	{
-		if (!pb->GetAlive(i))continue;
+		if (!be->GetAlive(i))continue;
 
-		float x = pl->GetPos().x - pb->GetPos(i).x;
-		float y = pl->GetPos().y - pb->GetPos(i).y;
+		float x = pl->GetPos().x - be->GetPos(i).x;
+		float y = pl->GetPos().y - be->GetPos(i).y;
 		float distance = sqrt(x * x + y * y);
 
-		if (distance < pl->GetRadius() + pb->GetRadius())
+		if (distance < pl->GetRadius() + be->GetRadius())
 		{
-			pl->SetAlive(false);
-			pb->SetAlive(i, false);
+			//爆発処理
+			ex->SetEx(pl->GetPos(), ex->m_exSize::pl);//爆発処理
+			ex->SetEx(be->GetPos(i), ex->m_exSize::be);
+
+			pl->SetHp(0);
+			be->SetAlive(i, false);
 			break;
 		}
 
@@ -121,7 +132,11 @@ void C_Hit::PlayerBulletToMidEnemy()
 			ex->SetEx(pb->GetPos(i), ex->m_exSize::pb);
 
 			// 当たり判定が成立した場合の処理
+			me->SetHit(true);
+
 			pb->SetAlive(i, false);
+			//スコアセット
+			m_gameScene->SetScore(50);
 			me->SetDamage(pb->GetDamage());
 			break;
 
@@ -139,6 +154,9 @@ void C_Hit::StrBulletToPlayer()
 	C_MidBullet* mb = m_gameScene->GetMidBullet();
 	C_Explosion* ex = m_gameScene->GetExplosion();
 
+	if (pl->GetHit())return;
+
+
 	for (int i = 0; i < mb->GetNum(); i++)
 	{
 		if (!mb->GetAlive(i))continue;
@@ -154,6 +172,7 @@ void C_Hit::StrBulletToPlayer()
 			ex->SetEx(mb->GetPos(i), ex->m_exSize::mb);
 
 			// 当たり判定が成立した場合の処理
+			pl->SetHit(true);
 			mb->SetAlive(i, false);
 			pl->SetDamage(mb->bulletDamage::str);
 			break;
@@ -170,6 +189,9 @@ void C_Hit::CloBulletToPlayer()
 	C_MidBullet* mb = m_gameScene->GetMidBullet();
 	C_Explosion* ex = m_gameScene->GetExplosion();
 
+	if (pl->GetHit())return;
+
+
 	for (int i = 0; i < mb->GetNum(); i++)
 	{
 		if (!mb->GetAlive(i))continue;
@@ -185,6 +207,7 @@ void C_Hit::CloBulletToPlayer()
 			ex->SetEx(mb->GetPos(i), ex->m_exSize::mb);
 
 			// 当たり判定が成立した場合の処理
+			pl->SetHit(true);
 			mb->SetAlive(i, false);
 			pl->SetDamage(mb->bulletDamage::clo);
 			break;
@@ -221,7 +244,7 @@ void C_Hit::PlayerMidEnemy()
 		ex->SetEx(pl->GetPos(), ex->m_exSize::pl);
 
 		// 当たり判定が成立した場合の処理
-		pl->SetAlive(false);
+		pl->SetHp(0);
 
 	}
 
@@ -260,7 +283,10 @@ void C_Hit::PlayerBulletToBossMain()
 			ex->SetEx(pb->GetPos(i), ex->m_exSize::pb);
 
 			// 当たり判定が成立した場合の処理
+			bs->SetHit(true);
 			pb->SetAlive(i, false);
+			//スコアセット
+			m_gameScene->SetScore(100);
 			bs->SetDamage(pb->GetDamage());
 			break;
 
@@ -277,6 +303,7 @@ void C_Hit::PlayerBulletToRightArm()
 	C_BossEnemy* bs = m_gameScene->GetBoss();
 	C_Explosion* ex = m_gameScene->GetExplosion();
 	
+	if (!bs->GetAlive())return;
 
 	for (int i = 0; i < pb->GetBuNum(); i++)
 	{
@@ -322,7 +349,10 @@ void C_Hit::PlayerBulletToRightArm()
 			ex->SetEx(pb->GetPos(i), ex->m_exSize::pb);
 
 			// 当たり判定が成立した場合の処理
+			bs->SetHit(true);
 			pb->SetAlive(i, false);
+			//スコアセット
+			m_gameScene->SetScore(50);
 			bs->SetDamage(pb->GetDamage());
 			break;
 
@@ -340,6 +370,7 @@ void C_Hit::PlayerBulletToLeftArm()
 	C_BossEnemy* bs = m_gameScene->GetBoss();
 	C_Explosion* ex = m_gameScene->GetExplosion();
 
+	if (!bs->GetAlive())return;
 
 	for (int i = 0; i < pb->GetBuNum(); i++)
 	{
@@ -385,7 +416,10 @@ void C_Hit::PlayerBulletToLeftArm()
 			ex->SetEx(pb->GetPos(i), ex->m_exSize::pb);
 
 			// 当たり判定が成立した場合の処理
+			bs->SetHit(true);
 			pb->SetAlive(i, false);
+			//スコアセット
+			m_gameScene->SetScore(50);
 			bs->SetDamage(pb->GetDamage());
 			break;
 
@@ -402,6 +436,9 @@ void C_Hit::BossBulletToPlayer()
 	C_BossBullet* bb = m_gameScene->GetBossBullet();
 	C_Explosion* ex = m_gameScene->GetExplosion();
 
+	if (pl->GetHit())return;
+
+
 	for (int i = 0; i < bb->GetNum(); i++)
 	{
 		if (!bb->GetAlive(i))continue;
@@ -417,6 +454,7 @@ void C_Hit::BossBulletToPlayer()
 			ex->SetEx(bb->GetPos(i), ex->m_exSize::mb);
 
 			// 当たり判定が成立した場合の処理
+			pl->SetHit(true);
 			bb->SetAlive(i, false);
 			pl->SetDamage(bb->GetDamage());
 			break;
@@ -433,7 +471,7 @@ void C_Hit::BossLaserToPlayer()
 	C_BossEnemy* bs = m_gameScene->GetBoss();
 	C_Explosion* ex = m_gameScene->GetExplosion();
 
-
+	if (pl->GetHit())return;
 	
 	if (!bl->GetAlive()) return;
 	if (!bl->GetJudge()) return;
@@ -479,8 +517,164 @@ void C_Hit::BossLaserToPlayer()
 		ex->SetEx(pl->GetPos(), ex->m_exSize::pl);
 
 		// 当たり判定が成立した場合の処理
+		pl->SetHit(true);
 		pl->SetDamage(bl->GetDamage());
 		bl->SetHit(true);
+
+	}
+
+
+}
+
+void C_Hit::PlayerBossMain()
+{
+
+	C_Player* pl = m_gameScene->GetPlayer();
+	C_BossEnemy* bs = m_gameScene->GetBoss();
+	C_Explosion* ex = m_gameScene->GetExplosion();
+
+	if (!bs->GetAlive())return;
+
+	float top = bs->GetPos().y + (bs->GetRad().y * bs->GetSize().y);
+	float bottom = bs->GetPos().y - (bs->GetRad().y * bs->GetSize().y) + 15;
+	float right = bs->GetPos().x + (bs->GetRad().x * bs->GetSize().x);
+	float left = bs->GetPos().x - (bs->GetRad().x * bs->GetSize().x);
+
+	if (!pl->GetAlive())return;
+
+	Math::Vector2 c = { pl->GetPos().x ,pl->GetPos().y };
+
+	float clX = clamp(c.x, left, right);
+	float clY = clamp(c.y, bottom, top);
+
+	float dx = c.x - clX;
+	float dy = c.y - clY;
+	float distance = (dx * dx + dy * dy);
+	if (distance <= pl->GetRadius() * pl->GetRadius())
+	{
+		// 当たり
+		//爆発処理
+		ex->SetEx(pl->GetPos(), ex->m_exSize::pl);
+
+		// 当たり判定が成立した場合の処理
+		pl->SetHp(0);
+
+	}
+
+	
+
+}
+
+void C_Hit::PlayerRightArm()
+{
+
+	C_Player* pl = m_gameScene->GetPlayer();
+	C_BossEnemy* bs = m_gameScene->GetBoss();
+	C_Explosion* ex = m_gameScene->GetExplosion();
+
+	if (!bs->GetAlive())return;
+	
+	if (!pl->GetAlive())return;
+
+	//レーザーの原点を(0,0)にした時のプレイヤーの位置
+	Math::Vector2 rel = pl->GetPos() - bs->GetPosR();
+	float halfW = 70 / 2.0f;
+	float halfH = 270 / 2.0f;
+
+
+	//float cosT = cos(DirectX::XMConvertToRadians(-(m_lastBoss->GetLaserAngle())));
+	//float sinT = sin(DirectX::XMConvertToRadians(-(m_lastBoss->GetLaserAngle())));
+	float cosT = cos(-(bs->GetRightAngle()));
+	float sinT = sin(-(bs->GetRightAngle()));
+
+
+	//レーザーの回転分を自機の座標に影響させる(回転行列を作成するときの式)
+	//localとレーザーの当たり判定はレーザーの回転を無かったことにできる
+	//(地面が傾いているので、自分も傾いて視点を合わせるイメージ)
+	Math::Vector2 local;
+	local.x = rel.x * cosT - rel.y * sinT;
+	local.y = rel.x * sinT + rel.y * cosT;
+
+	//もうレーザーの回転は考慮しなくていいので普通に当たり判定
+	//レーザーの4頂点(座標は(0,0)で考える)
+	float laserRight = halfW;
+	float laserLeft = -halfW;
+	float laserTop = halfH;
+	float laserBottom = -halfH;
+
+	//自機の4頂点(レーザー分の回転を影響させた座標localを使用)
+	float myRight = local.x + pl->GetRadius();
+	float myLeft = local.x - pl->GetRadius();
+	float myTop = local.y + pl->GetRadius();
+	float myBottom = local.y - pl->GetRadius();
+
+	if ((myRight > laserLeft) && (myLeft < laserRight) && (myTop > laserBottom) && (myBottom < laserTop))
+	{
+
+		// 当たり
+		//爆発処理
+		ex->SetEx(pl->GetPos(), ex->m_exSize::pl);
+
+		// 当たり判定が成立した場合の処理
+		pl->SetHp(0);
+		
+
+	}
+
+}
+
+void C_Hit::PlayerLeftArm()
+{
+
+	C_Player* pl = m_gameScene->GetPlayer();
+	C_BossEnemy* bs = m_gameScene->GetBoss();
+	C_Explosion* ex = m_gameScene->GetExplosion();
+
+	if (!bs->GetAlive())return;
+	
+	if (!pl->GetAlive())return;
+
+	//レーザーの原点を(0,0)にした時のプレイヤーの位置
+	Math::Vector2 rel = pl->GetPos() - bs->GetPosL();
+	float halfW = 70 / 2.0f;
+	float halfH = 270 / 2.0f;
+
+
+	//float cosT = cos(DirectX::XMConvertToRadians(-(m_lastBoss->GetLaserAngle())));
+	//float sinT = sin(DirectX::XMConvertToRadians(-(m_lastBoss->GetLaserAngle())));
+	float cosT = cos(-(bs->GetLeftAngle()));
+	float sinT = sin(-(bs->GetLeftAngle()));
+
+
+	//レーザーの回転分を自機の座標に影響させる(回転行列を作成するときの式)
+	//localとレーザーの当たり判定はレーザーの回転を無かったことにできる
+	//(地面が傾いているので、自分も傾いて視点を合わせるイメージ)
+	Math::Vector2 local;
+	local.x = rel.x * cosT - rel.y * sinT;
+	local.y = rel.x * sinT + rel.y * cosT;
+
+	//もうレーザーの回転は考慮しなくていいので普通に当たり判定
+	//レーザーの4頂点(座標は(0,0)で考える)
+	float laserRight = halfW;
+	float laserLeft = -halfW;
+	float laserTop = halfH;
+	float laserBottom = -halfH;
+
+	//自機の4頂点(レーザー分の回転を影響させた座標localを使用)
+	float myRight = local.x + pl->GetRadius();
+	float myLeft = local.x - pl->GetRadius();
+	float myTop = local.y + pl->GetRadius();
+	float myBottom = local.y - pl->GetRadius();
+
+	if ((myRight > laserLeft) && (myLeft < laserRight) && (myTop > laserBottom) && (myBottom < laserTop))
+	{
+
+		// 当たり
+		//爆発処理
+		ex->SetEx(pl->GetPos(), ex->m_exSize::pb);
+
+		// 当たり判定が成立した場合の処理
+		pl->SetHp(0);
 
 	}
 

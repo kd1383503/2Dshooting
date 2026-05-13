@@ -9,7 +9,7 @@ public:
 	enum m_exSize
 	{
 		pb = 1,		//Ž©‹@’e
-		be = 2,		//ŽG‹›“G
+		be = 4,		//ŽG‹›“G
 		pl = 4,		//Ž©‹@
 		mb = 2,		//“G2’e
 		me = 8,		//“G2

@@ -17,6 +17,10 @@ class C_Explosion;//爆発エフェクトクラスの前方宣言
 
 class C_Back;	// 背景のクラスの前方宣言
 
+class C_PlayerHp;//hpUI
+class C_Score;//score
+
+class C_Warning;
 
 class C_GameScene : public C_StateScene
 {
@@ -34,11 +38,14 @@ public:
 	//ゲームシーンの関数
 	bool m_stop;//ゲームの進行を一時中断する変数
 	int m_frame;//ゲーム実行中の時間を調べるため
+	int m_score;
 
 
 	//ゲームシーンの関数
 	bool GetStop() { return m_stop; }
 	void SetStop(bool stop) { m_stop = stop; }//他クラスからゲームの一時中断をさせるための関数
+	int GetScore() { return m_score; }
+	void SetScore(int s) { m_score += s; }
 
 
 	//各クラスのインスタンスを渡すためのゲッター関数
@@ -72,8 +79,9 @@ private:
 
 	C_Back* m_back = nullptr; // 背景のポインタ
 	
+	C_PlayerHp* m_hp = nullptr;
+	C_Score* m_scoreUI = nullptr;
 
-	
-
+	C_Warning* m_warning = nullptr;
 
 };

@@ -94,6 +94,18 @@
     <Filter Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser">
       <UniqueIdentifier>{c918da0d-e936-4e1f-a305-95217228e57d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\UI">
+      <UniqueIdentifier>{a7e0f0e7-3c8b-4459-8175-565c1c271c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\UI\Score">
+      <UniqueIdentifier>{4be848c6-bddb-4432-8119-5cb3666e6dd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\UI\PlayerHp">
+      <UniqueIdentifier>{9cfaec4e-ae3a-4bf2-9740-1c3fc034c7af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Manager\GameScene\Warning">
+      <UniqueIdentifier>{1c42de27-2732-430c-b83e-e98c2a4aa0ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -240,6 +252,15 @@
     <ClInclude Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser\BossLaser.h">
       <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\UI\PlayerHp\PlayerHp.h">
+      <Filter>Src\Application\Manager\GameScene\UI\PlayerHp</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\UI\Score\Score.h">
+      <Filter>Src\Application\Manager\GameScene\UI\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Manager\GameScene\Warning\Warning.h">
+      <Filter>Src\Application\Manager\GameScene\Warning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -346,6 +367,15 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser\BossLaser.cpp">
       <Filter>Src\Application\Manager\GameScene\Chara\Enemy\BossEnemy\BossLaser</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\UI\PlayerHp\PlayerHp.cpp">
+      <Filter>Src\Application\Manager\GameScene\UI\PlayerHp</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\UI\Score\Score.cpp">
+      <Filter>Src\Application\Manager\GameScene\UI\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Manager\GameScene\Warning\Warning.cpp">
+      <Filter>Src\Application\Manager\GameScene\Warning</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

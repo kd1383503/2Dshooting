@@ -1,5 +1,6 @@
 #pragma once
 
+class C_GameScene;
 
 class C_BossLaser
 {
@@ -31,8 +32,15 @@ public:
 	void SetJudge(bool flg) { m_hitjudge = flg; }
 	void SetHit(bool flg) { m_hit = flg; }
 
+	void SetGameScene(C_GameScene* _gameScene)
+	{
+		if (!_gameScene)return;
+		m_gameScene = _gameScene;
+	}
 
 private:
+
+	C_GameScene* m_gameScene;
 
 	void Release();
 
@@ -42,7 +50,7 @@ private:
 	Math::Vector2 m_pos;
 	float m_size;
 	bool m_alive;
-	const int m_damage = 5;
+	const int m_damage = 10;
 	float m_angle;
 	static const int m_animMax = 19;
 	int m_anim[m_animMax] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 13, 14, 13, 14 };
