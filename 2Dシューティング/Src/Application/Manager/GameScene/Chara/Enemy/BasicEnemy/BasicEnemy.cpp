@@ -125,7 +125,7 @@ void C_BasicEnemy::Update()
 	
 	C_BossEnemy* bs = m_gameScene->GetBoss();
 
-	if (!bs->GetAlive())
+	if (!bs->GetAlive() && !bs->GetWait() && !bs->GetWarning())
 	{
 		if (dist(mt) <= 10) {
 			// 20% ‚ÌŠm—¦

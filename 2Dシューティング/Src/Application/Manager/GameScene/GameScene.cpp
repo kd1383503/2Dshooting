@@ -108,6 +108,7 @@ void C_GameScene::Update()
 
 	
 	 //オプション部分は下に
+	Debug();
 
 
 
@@ -136,6 +137,7 @@ void C_GameScene::MatUpdate()
 
 	m_warning->MatUpdate();
 
+	
 
 }
 
@@ -246,5 +248,41 @@ void C_GameScene::Release()
 	m_hp = nullptr;
 	if (m_scoreUI != nullptr) delete m_scoreUI;
 	m_scoreUI = nullptr;
+
+}
+
+void C_GameScene::Debug()
+{
+
+	if (GetAsyncKeyState('T') & 0x8000)
+	{
+		SCENEMANAGER.ChangeState(new C_TitleScene());
+		return;
+	}
+	if (GetAsyncKeyState('Y') & 0x8000)
+	{
+		SCENE.SetResult(false);//敗北をセット
+		SCENEMANAGER.ChangeState(new C_ResultScene());
+		return;
+	}
+	if (GetAsyncKeyState('R') & 0x8000)
+	{
+		SCENE.SetResult(true);
+		std::random_device rd;
+		std::mt19937 mt(rd());
+		std::uniform_int_distribution<int> dist(0, 99999999);
+		SCENE.SetScore(dist(mt));
+		SCENEMANAGER.ChangeState(new C_ResultScene());
+		return;
+	}
+
+	if (GetAsyncKeyState('B') & 0x8000)
+	{
+		m_midEnemy->SetKillCnt();
+	}
+	if (GetAsyncKeyState('M') & 0x8000)
+	{
+		m_basicEnemy->SetKillCnt();
+	}
 
 }

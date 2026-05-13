@@ -28,6 +28,9 @@ public:
 	void SetDamage(int damage) { m_hp -= damage; }
 	void SetAlive(bool alive) { m_alive = alive; }
 
+	//debug
+	void SetKillCnt() { m_kill = 2; }
+
 	void SetHit(bool flg) 
 	{ 
 		m_hit = flg; 
@@ -73,7 +76,7 @@ private:
 	//É{ÉXèoåª
 	int m_kill = 0;
 
-	bool m_hit = false;;
+	bool m_hit = false;
 	int m_cnt = 0;
 
 };

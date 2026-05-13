@@ -32,6 +32,10 @@ public:
 	void SetHp(int i, int hp) { m_hp[i] = hp; }
 	void SetDamage(int i, int damage) { m_hp[i] -= damage; }
 	void SetKill(int i) { m_killCnt = i; }
+
+	//debug
+	void SetKillCnt() { m_killCnt = 10; }
+
 	void SetHit(int i, bool flg)
 	{
 		m_hit[i] = flg;

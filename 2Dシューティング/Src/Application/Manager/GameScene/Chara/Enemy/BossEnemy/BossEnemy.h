@@ -16,11 +16,18 @@ public:
 	void Update()override;
 	void Draw()override;
 
+	void RotateArm();
+	void BulletATK();
+	void LaserATK();
+	void LushATK();
+
 	float RightArmAngle();
 	float LeftArmAngle();
 	float Clamp(float v, float minV, float maxV);
 	Math::Vector2 Rotate(Math::Vector2 v, float angle);
 	float GetBossPlayerAngle();
+
+
 
 	//ÉQÉbÉ^Å[
 	Math::Vector2 GetPos() { return m_pos; }
@@ -52,6 +59,7 @@ public:
 	void SetStart() { m_start = true; }
 	void SetWarning() { m_warning = false; }
 	bool GetWarning() { return m_warning; }
+	bool GetWait() { return m_wait; }
 
 	//gamesceneSet
 	void SetGameScene(C_GameScene* _gameScene)
@@ -112,5 +120,21 @@ private:
 
 	bool m_hit = {};
 	int m_cnt = 0;
+
+	int m_warningCnt = 0;
+	bool m_wait = false;
+
+
+	bool m_rush;
+	int m_rushAtkTime = 0;
+	int m_rushCnt;
+	bool m_danger = false;
+	int m_dangerCnt = 0;
+	bool m_nowRush = false;
+
+	KdTexture m_dangerTex;
+	Math::Matrix m_dangerMat;
+	float m_dangerAlpha;
+	float m_addDanger;
 
 };

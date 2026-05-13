@@ -45,7 +45,7 @@ private:
 	Math::Vector2 m_framePos;
 	
 	
-	
+	float m_alpha;
 
 
 

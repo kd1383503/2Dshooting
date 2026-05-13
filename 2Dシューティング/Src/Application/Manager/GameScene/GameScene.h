@@ -35,6 +35,8 @@ public:
 	void Draw() override;
 	void Release() override;
 
+	void Debug();
+
 	//ゲームシーンの関数
 	bool m_stop;//ゲームの進行を一時中断する変数
 	int m_frame;//ゲーム実行中の時間を調べるため

@@ -27,7 +27,7 @@ void C_ResultScene::Draw()
 		SHADER.m_spriteShader.DrawTex(&m_scTex, Math::Rectangle(0, 0, 116, 46), &col);
 
 		SHADER.m_spriteShader.SetMatrix(m_peMat);
-		SHADER.m_spriteShader.DrawTex(&m_peTex, Math::Rectangle(0, 0, 200, 70), m_peAlpha);
+		SHADER.m_spriteShader.DrawTex(&m_peTex, Math::Rectangle(0, 0, 547, 121), m_peAlpha);
 
 	}
 	else//ゲームオーバー
@@ -41,7 +41,7 @@ void C_ResultScene::Draw()
 		SHADER.m_spriteShader.DrawTex(&m_gameoverTex, Math::Rectangle(0, 0, 351, 107), m_goAlpha);
 
 		SHADER.m_spriteShader.SetMatrix(m_peMat);
-		SHADER.m_spriteShader.DrawTex(&m_peTex, Math::Rectangle(0, 0, 200, 70), m_peAlpha);
+		SHADER.m_spriteShader.DrawTex(&m_peTex, Math::Rectangle(0, 0, 547, 121), m_peAlpha);
 	
 	}
 }
@@ -204,7 +204,7 @@ void C_ResultScene::MatUpdate()
 	m_gameoverMat = scale * trans;
 
 	trans = Math::Matrix::CreateTranslation(0, -270, 0);
-	scale = Math::Matrix::CreateScale(1, 1, 1);
+	scale = Math::Matrix::CreateScale(0.6, 0.3, 1);
 	m_peMat = scale * trans;
 	
 }
@@ -219,7 +219,7 @@ void C_ResultScene::Init()
 
 	m_gameoverTex.Load("Asset/texture/ResultScene/gameover.png");
 	m_blackTex.Load("Asset/texture/ResultScene/black.png");
-	m_peTex.Load("Asset/texture/TitleScene/pressEnter.png");
+	m_peTex.Load("Asset/texture/TitleScene/pe.png");
 
 	if (SCENE.GetResult())//クリア
 	{

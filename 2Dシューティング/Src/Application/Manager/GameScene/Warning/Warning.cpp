@@ -98,7 +98,7 @@ void C_Warning::Init()
 	m_btmPos2 = { 1228,0 };
 
 	m_scroll = 3.0f;
-	m_cnt = 120;
+	m_cnt = 180;
 	m_alpha = 0.0f;
 	m_addAlpha = 0.05;
 

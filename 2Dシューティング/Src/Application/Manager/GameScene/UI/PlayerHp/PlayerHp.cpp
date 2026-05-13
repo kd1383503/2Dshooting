@@ -5,8 +5,19 @@
 
 void C_PlayerHp::Draw()
 {
+	C_Player* pl = m_gameScene->GetPlayer();
 
-	Math::Color col = { 1,1,1,1.0f };
+
+	if (pl->GetPos().x <= -300 && pl->GetPos().y <= -270)
+	{
+		m_alpha = 0.1f;
+	}
+	else
+	{
+		m_alpha = 1.0f;
+	}
+
+	Math::Color col = { 1,1,1,m_alpha };
 	Math::Rectangle rec = { 0,0,20,20 };
 	SHADER.m_spriteShader.SetMatrix(m_iconMat);
 	SHADER.m_spriteShader.DrawTex(&m_iconTex, rec, &col);
@@ -15,21 +26,48 @@ void C_PlayerHp::Draw()
 	SHADER.m_spriteShader.SetMatrix(m_frameMat);
 	SHADER.m_spriteShader.DrawTex(&m_frameTex, rec, &col);
 
-	C_Player* pl = m_gameScene->GetPlayer();
 
 	for (int i = 0;i < pl->GetHp();i++)
 	{
 		if (pl->GetHp() <= 3)
 		{
-			col = { 1,0,0,1 };
+			if (pl->GetPos().x <= -300 && pl->GetPos().y <= -270)
+			{
+				m_alpha = 0.1f;
+				col = { 1,0,0,m_alpha };
+			}
+			else
+			{
+				m_alpha = 1.0f;
+				col = { 1,0,0,m_alpha };
+			}
+			
 		}
 		else if (pl->GetHp() <= 6)
 		{
-			col = { 1,1,0,1 };
+			if (pl->GetPos().x <= -300 && pl->GetPos().y <= -270)
+			{
+				m_alpha = 0.1f;
+				col = { 1,1,0,m_alpha };
+			}
+			else
+			{
+				m_alpha = 1.0f;
+				col = { 1,1,0,m_alpha };
+			}
 		}
 		else
 		{
-			col = { 0,1,0,1 };
+			if (pl->GetPos().x <= -300 && pl->GetPos().y <= -270)
+			{
+				m_alpha = 0.1f;
+				col = { 0,1,0,m_alpha };
+			}
+			else
+			{
+				m_alpha = 1.0f;
+				col = { 0,1,0,m_alpha };
+			}
 		}
 
 		rec = { 0,0,4,3 };
@@ -43,7 +81,6 @@ void C_PlayerHp::Draw()
 
 void C_PlayerHp::Update()
 {
-
 
 
 }
@@ -82,6 +119,8 @@ void C_PlayerHp::Init()
 	{
 		m_barPos[i] = { -567.0f + (i * 20) ,-337};
 	}
+	m_alpha = 1.0f;
+
 
 }
 
